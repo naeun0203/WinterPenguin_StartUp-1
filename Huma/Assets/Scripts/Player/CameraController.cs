@@ -15,6 +15,7 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        mainCamera.transform.position = new Vector3(player.transform.localPosition.x, player.transform.position.y + 9, player.transform.localPosition.z);
+        mainCamera.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 9, player.transform.position.z - (player.transform.position.y+9)*(1/Mathf.Sqrt(3)));
+        mainCamera.transform.rotation = Quaternion.LookRotation(player.transform.position - mainCamera.transform.position );
     }
 }
