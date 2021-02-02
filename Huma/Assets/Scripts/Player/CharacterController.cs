@@ -57,6 +57,6 @@ public class CharacterController : MonoBehaviour
     {
         Vector3 dir = targetPos - Player.transform.position;
         Vector3 dirXZ = new Vector3(dir.x, Player.transform.position.y, dir.z);
-
+        Player.transform.LookAt(dirXZ);
     }
 }
