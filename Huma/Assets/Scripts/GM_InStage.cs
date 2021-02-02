@@ -14,6 +14,8 @@ public class GM_InStage : MonoBehaviour
 {
     public GameObject escPanel;
     public GameObject clearPanel;
+    public GameObject roulettePanel;
+    public GameObject slotmachinePanel;
 
     // Start is called before the first frame update
     void Start()
@@ -24,9 +26,19 @@ public class GM_InStage : MonoBehaviour
     {
         escPanel.SetActive(false);
     }
+    public void SlotMachine()
+    {
+        escPanel.SetActive(false);
+        slotmachinePanel.SetActive(true);
+    }
     public void StageSelect()
     {
         SceneManager.LoadScene("StageSelect");
+    }
+    public void Enhancement()
+    {
+        escPanel.SetActive(false);
+        roulettePanel.SetActive(true);
     }
     // Update is called once per frame
     void Update()
