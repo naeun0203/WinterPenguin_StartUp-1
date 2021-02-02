@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameUI_Manager : MonoBehaviour
+public class SkillCoolTime : MonoBehaviour
 {
     public Image skillImage;
     public Text skillText;

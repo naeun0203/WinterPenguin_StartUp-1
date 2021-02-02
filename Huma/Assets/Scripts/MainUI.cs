@@ -1,6 +1,6 @@
 ﻿//**********************************
 // EDITOR : KANG DaHye
-// LAST EDITED DATE : 2021.01.19
+// LAST EDITED DATE : 2021.01.27
 // Scrit Purpose : ...
 //**********************************
 
@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainUI_Manager : MonoBehaviour
+public class MainUI : MonoBehaviour
 {
     public GameObject optionMenu;
     public GameObject Intro;
@@ -17,6 +17,8 @@ public class MainUI_Manager : MonoBehaviour
     void Start()
     {
         optionMenu.SetActive(false);
+        Stage.SetActive(false);
+        Intro.SetActive(true);
     }
     void Update()
     {
@@ -42,7 +44,6 @@ public class MainUI_Manager : MonoBehaviour
                 Stage.SetActive(true);
             }
         }
-
     }
     public void CloseMenu()
     {

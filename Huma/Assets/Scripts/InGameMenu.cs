@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InGameMenuManager : MonoBehaviour
+public class InGameMenu : MonoBehaviour
 {
     public GameObject subMenu;
     public GameObject settingMenu;
