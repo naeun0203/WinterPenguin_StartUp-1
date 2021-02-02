@@ -1,45 +1,28 @@
-﻿using System.Collections;
+﻿//************************************************
+// EDITOR : JNE
+// LAST EDITED DATE : 2020.01.27
+// Script Purpose : Monster_Spiter Spit
+//******************************************************
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SpiterSpit : MonoBehaviour
-{
-    public float Speed = 1f;
-    public float Damage = 1.0f;
-    private Transform PlayerTr;
-    Rigidbody rigd;
-    Poolable poolable;
-    void Start()
+{ 
+    //public float damage = 1.0f;
+    private void OnTriggerEnter(Collider collision)
     {
-        PlayerTr = GameObject.FindWithTag("Player").GetComponent<Transform>();
-        poolable = this.gameObject.GetComponent<Poolable>();
-        rigd = GetComponent<Rigidbody>();
-    }
-    
-    void Update()
-    {
-        Vector3 direction = PlayerTr.position - transform.position;
-        //transform.Translate(Vector3.forward * Time.deltaTime * Speed);
-        //rigd.AddForce(transform.forward * Speed);
-        //rigd.velocity = direction.normalized * Speed;
-        //rigd.velocity = transform.forward * Speed;
-        //transform.Translate(direction);
-    }
-
-    private void OnBecameInvisible()
-    {
-        poolable.Push();
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.tag == "wall")
+        if (collision.tag == "Wall")
         {
-            poolable.Push();
+            gameObject.SetActive(false);
         }
-        else if (collision.collider.tag == "Player")
+        else if (collision.tag == "Player")
         {
-            poolable.Push();
+            gameObject.SetActive(false);
+            /*
+            Player player = new Player();
+            player.HpChanged(damage);
+            */
         }
     }
 }

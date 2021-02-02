@@ -1,7 +1,7 @@
 ﻿//************************************************
 // EDITOR : JNE
-// LAST EDITED DATE : 2020.01.19
-// Script Purpose : Monster_Spiter Attack
+// LAST EDITED DATE : 2020.01.30
+// Script Purpose : Monster_Spiter Attack, Spit parabola
 //******************************************************
 using System.Collections;
 using System.Collections.Generic;
@@ -11,14 +11,33 @@ public class SpiterAttack : MonoBehaviour
 {
     private float nextTime = 0.0f;
     public float AttackSpeed = 2.0f;
+    public float SpitSpeed = 1.0f;
+    public float SpitListSize = 10;
 
-    public Transform SpiterMouth;
+    private Transform playerTransform;
+
+    private float firingAngle = 45.0f;
+    private float gravity = 9.8f;
+
     MonsterManager monManager;
+    List<GameObject> SpitList;
+    public GameObject Spit;
+    public GameObject SpiterMouth;
+
 
     void Start()
     {
+        playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
         monManager = this.gameObject.GetComponent<MonsterManager>();
+        SpitList = new List<GameObject>();
+        for (int i = 0; i < SpitListSize; i++)
+        {
+            GameObject objSpit = (GameObject)Instantiate(Spit);
+            objSpit.SetActive(false);
+            SpitList.Add(objSpit);
+        }
     }
+
     void Update()
     {
         if (monManager.isAttack == true)
@@ -26,8 +45,49 @@ public class SpiterAttack : MonoBehaviour
             if (Time.time > nextTime)
             {
                 nextTime = Time.time + AttackSpeed;
-                //ObjectPoolManager.Instance.pool.Pop().transform.position = SpiterMouth.transform.position;
+                Fire();
             }
+        }
+
+    }
+    void Fire()
+    {
+        for (int i = 0; i < SpitList.Count; i++)
+        {
+            if(!SpitList[i].activeInHierarchy)
+            {
+                SpitList[i].transform.position = SpiterMouth.transform.position;
+                SpitList[i].transform.rotation = SpiterMouth.transform.rotation;
+                SpitList[i].SetActive(true);
+                Rigidbody tempRigidBodySpit = SpitList[i].GetComponent<Rigidbody>();
+                StartCoroutine(SimulateProjectile(i));
+                break;
+            }
+        }
+    }
+    IEnumerator SimulateProjectile(int i)
+    {
+        yield return new WaitForSeconds(0.0f);
+        SpitList[i].transform.position = SpiterMouth.transform.position + new Vector3(0, 0.0f, 0);
+        Vector3 Player = playerTransform.position + new Vector3(0, -playerTransform.position.y, 0);
+        float target_Distance = Vector3.Distance(SpitList[i].transform.position, Player);
+        float Spit_Velocity = target_Distance / (Mathf.Sin(2 * firingAngle * Mathf.Deg2Rad) / gravity);
+
+        float Vx = Mathf.Sqrt(Spit_Velocity) * Mathf.Cos(firingAngle * Mathf.Deg2Rad);
+        float Vy = Mathf.Sqrt(Spit_Velocity) * Mathf.Sin(firingAngle * Mathf.Deg2Rad);
+
+        float flightDuration = target_Distance / Vx;
+
+        SpitList[i].transform.rotation = Quaternion.LookRotation(Player - SpitList[i].transform.position);
+        float elapse_time = 0;
+
+        while (elapse_time < flightDuration )
+        {
+            SpitList[i].transform.Translate(0, (Vy - (gravity * elapse_time)) * Time.deltaTime, Vx * Time.deltaTime);
+
+            elapse_time += Time.deltaTime;
+
+            yield return null;
         }
     }
 }
