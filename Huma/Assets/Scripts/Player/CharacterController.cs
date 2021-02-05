@@ -47,16 +47,17 @@ public class CharacterController : MonoBehaviour
             {
                 targetPos = hit.point;
             }
-            Turn(targetPos);
+            
         }
-        
+        Turn(targetPos);
         Debug.DrawRay(temp.origin, temp.direction * 100, Color.red);
     }
 
     private void Turn(Vector3 targetPos)
     {
         Vector3 dir = targetPos - Player.transform.position;
-        Vector3 dirXZ = new Vector3(dir.x, Player.transform.position.y, dir.z);
-        Player.transform.LookAt(dirXZ);
+        Vector3 dirXZ = new Vector3(dir.x, Player.transform.forward.y, dir.z);
+
+        Player.transform.forward = Vector3.Lerp(Player.transform.forward, dirXZ, rotSpeed*Time.deltaTime);
     }
 }
