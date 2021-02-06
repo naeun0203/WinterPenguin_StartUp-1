@@ -2,17 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using System;
 
 public class DBManager_Player : MonoBehaviour
 {
     private string[] characters;
 
-    private void Start()
+    public int ID; // Character ID
+    public string characterName;
+    public int damage;
+    public int hp;
+    public float attackSpeed;
+    public int attackRange;
+    public int attackRadius;
+    public float criticalProb;
+    public float criticalDamage;
+    public float bloodSucking;
+    public int moveSpeed;
+    public int NumberOfTargets;
+    public int skillCoolTime;
+
+    public bool isLoaded = false;
+
+    public void LoadingCharacterData(int ID)
     {
-        StartCoroutine(DataGet("http://localhost/WinterPenguin_Huma/CharactersDB.php"));
+        isLoaded = false;
+        StartCoroutine(DataGet("http://localhost/WinterPenguin_Huma/CharactersDB.php", ID));
+
     }
 
-    private IEnumerator DataGet(string _url)
+    private IEnumerator DataGet(string _url, int _index)
     {
         UnityWebRequest www = UnityWebRequest.Get(_url);
         yield return www.SendWebRequest();
@@ -22,13 +41,28 @@ public class DBManager_Player : MonoBehaviour
         }
 
         characters = www.downloadHandler.text.Split(';');
-        Debug.Log(GetDataValue(characters[0], "Damage:"));
+
+        characterName = GetDataValue(characters[_index], "Name:");
+        hp = Convert.ToInt32(GetDataValue(characters[_index], "HP:"));
+        damage = Convert.ToInt32(GetDataValue(characters[_index], "Damage:"));
+        attackSpeed = Convert.ToSingle(GetDataValue(characters[_index], "AttackSpeed:"));
+        attackRange = Convert.ToInt32(GetDataValue(characters[_index], "AttackRange:"));
+        attackRadius = Convert.ToInt32(GetDataValue(characters[_index], "AttackRadius:"));
+        criticalProb = Convert.ToSingle(GetDataValue(characters[_index], "CriticalProbability:"));
+        criticalDamage = Convert.ToSingle(GetDataValue(characters[_index], "CriticalDamage:"));
+        bloodSucking = Convert.ToSingle(GetDataValue(characters[_index], "BloodSucking:"));
+        moveSpeed = Convert.ToInt32(GetDataValue(characters[_index], "MoveSpeed:"));
+        NumberOfTargets = Convert.ToInt32(GetDataValue(characters[_index], "NumberOfTargets:"));
+        skillCoolTime = Convert.ToInt32(GetDataValue(characters[_index], "SkillCoolTime:"));
+        isLoaded = true;
+
     }
 
     string GetDataValue(string data, string index)
     {
         string value = data.Substring(data.IndexOf(index)+index.Length) ;
-        value = value.Remove(value.IndexOf("|"));
+        if(value.Contains("|"))
+            value = value.Remove(value.IndexOf("|"));
         return value;
     }
 }
