@@ -9,7 +9,7 @@ using UnityEngine;
 
 public class SpiterSpit : MonoBehaviour
 { 
-    //public float damage = 1.0f;
+    public float damage = 1.0f;
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.tag == "Wall")
@@ -19,10 +19,10 @@ public class SpiterSpit : MonoBehaviour
         else if (collision.tag == "Player")
         {
             gameObject.SetActive(false);
-            /*
+/*
             Player player = new Player();
             player.HpChanged(damage);
-            */
+*/
         }
     }
 }

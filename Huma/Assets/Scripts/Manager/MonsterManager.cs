@@ -39,6 +39,12 @@ public class MonsterManager : MonoBehaviour
         {
             isDead = true;
         }
+        /*
+        Vector3 Target = playerTransform.position - transform.position;
+        Target.Normalize();
+        Quaternion q = Quaternion.LookRotation(Target);
+        transform.rotation = q;
+        */
         transform.LookAt(playerTransform.position);
     }
 

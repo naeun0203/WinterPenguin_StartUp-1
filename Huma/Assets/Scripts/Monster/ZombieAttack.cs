@@ -1,7 +1,7 @@
 ﻿//************************************************
 // EDITOR : JNE
-// LAST EDITED DATE : 2020.01.19
-// Script Purpose : Zombie Attack
+// LAST EDITED DATE : 2020.02.05
+// Script Purpose : Zombie Attack damage
 //******************************************************
 using System.Collections;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ public class ZombieAttack : MonoBehaviour
     public float AttackSpeed = 2.0f;
     private float nextTime = 0.0f;
 
-    public float Damage = 1.0f;
+    public float damage = 1.0f;
     // Start is called before the first frame update
     MonsterManager monManager;
     void Start()
@@ -35,6 +35,9 @@ public class ZombieAttack : MonoBehaviour
 
     private void Attack()
     {
-
+/*
+        Player player = new Player();
+        player.HpChanged(damage);
+*/
     }
 }

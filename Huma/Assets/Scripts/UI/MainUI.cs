@@ -1,6 +1,6 @@
 ﻿//**********************************
 // EDITOR : KANG DaHye
-// LAST EDITED DATE : 2021.01.27
+// LAST EDITED DATE : 2021.02.03
 // Scrit Purpose : ...
 //**********************************
 
@@ -52,9 +52,5 @@ public class MainUI : MonoBehaviour
     public void SetOptionMenuActivation()
     {
         optionMenu.SetActive(true);
-    }
-    public void ExitGame()
-    {
-        Application.Quit();
     }
 }
