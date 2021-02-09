@@ -10,29 +10,39 @@ public class Character_SuHyeon : Player
     private void Start()
     {
         PlayerDB = GameObject.Find("DBManager").GetComponent<DBManager_Player>();
-        characterCont = GetComponent<CharacterController>();
         PlayerDB.LoadingCharacterData(0);
+        characterCont = GetComponent<CharacterController>();
         StartCoroutine(DataSet());
-        
     }
+   
+    
 
     private IEnumerator DataSet()
     {
-        yield return PlayerDB.isLoaded;
-        HP = PlayerDB.hp;
-        AtkDamage = PlayerDB.damage;
-        AtkSpeed = PlayerDB.attackSpeed;
-        AtkRange = PlayerDB.attackRange;
-        AtkRadius = PlayerDB.attackRadius;
-        CriticalProb = PlayerDB.criticalProb;
-        CriticalDamage = PlayerDB.criticalDamage;
-        BloodSucking = PlayerDB.bloodSucking;
-        MoveSpeed = PlayerDB.moveSpeed;
-        AtkCount = PlayerDB.NumberOfTargets;
-        SkillCoolTime = PlayerDB.skillCoolTime;
+        bool DataLoading = true;
+
+        while (DataLoading)
+        {
+            if (PlayerDB.isLoaded)
+            {
+                HP = PlayerDB.hp;
+                AtkDamage = PlayerDB.damage;
+                AtkSpeed = PlayerDB.attackSpeed;
+                AtkRange = PlayerDB.attackRange;
+                AtkRadius = PlayerDB.attackRadius;
+                CriticalProb = PlayerDB.criticalProb;
+                CriticalDamage = PlayerDB.criticalDamage;
+                BloodSucking = PlayerDB.bloodSucking;
+                MoveSpeed = PlayerDB.moveSpeed;
+                AtkCount = PlayerDB.NumberOfTargets;
+                SkillCoolTime = PlayerDB.skillCoolTime;
+
+                DataLoading = false;
+            }
+            yield return null;
+        }
 
         characterCont.speed = MoveSpeed;
-
         yield return null;
     }
 

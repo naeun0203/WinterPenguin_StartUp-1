@@ -7,9 +7,7 @@ public class CharacterController : MonoBehaviour
     #region DirectionVar
     private float h;
     private float v;
-    Rigidbody rb;
     public float speed;
-    private float velocity;
     public GameObject Player;
     #endregion DirectionVar
 
@@ -21,7 +19,6 @@ public class CharacterController : MonoBehaviour
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
         mainCamera = Camera.main;
     }
 
@@ -37,7 +34,7 @@ public class CharacterController : MonoBehaviour
     private void Update()
     {
         Ray temp = new Ray(Vector3.zero, Vector3.zero);
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0))
         {
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             temp = ray;
@@ -47,17 +44,31 @@ public class CharacterController : MonoBehaviour
             {
                 targetPos = hit.point;
             }
-            
+            StartCoroutine(TurnAndStop());
         }
-        Turn(targetPos);
+
         Debug.DrawRay(temp.origin, temp.direction * 100, Color.red);
     }
 
-    private void Turn(Vector3 targetPos)
+    private void Turn(Vector3 targetPos,float elapsedTime)
     {
         Vector3 dir = targetPos - Player.transform.position;
         Vector3 dirXZ = new Vector3(dir.x, Player.transform.forward.y, dir.z);
 
-        Player.transform.forward = Vector3.Lerp(Player.transform.forward, dirXZ, rotSpeed*Time.deltaTime);
+        Player.transform.forward = Vector3.Lerp(Player.transform.forward, dirXZ, elapsedTime / rotSpeed) ;
+    }
+
+    private IEnumerator TurnAndStop()
+    {
+        float elapsedTime = 0;
+        while (elapsedTime < rotSpeed)
+        {
+            Turn(targetPos, elapsedTime);
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
+        }
+
+        yield return null;
     }
 }
