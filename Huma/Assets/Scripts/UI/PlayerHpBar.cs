@@ -8,6 +8,8 @@ public class PlayerHpBar : MonoBehaviour
     private float maxHp;//
     private Transform cam;
 
+
+    public GameObject Player;
     public Image healthbarImage;
     public Transform hpbarPivot;
     //public float activeTime = 5f;
@@ -19,7 +21,7 @@ public class PlayerHpBar : MonoBehaviour
     {
         cam = Camera.main.transform;
 
-        maxHp = GetComponent<Player>().HP;
+        maxHp = Player.GetComponent<Player>().HP;
         currentHp = maxHp;
         hpbarPivot.gameObject.SetActive(true);
     }
