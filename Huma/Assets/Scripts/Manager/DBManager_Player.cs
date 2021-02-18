@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿/*
+ * 
+ * EDITOR : KIM Ji hun 
+ * Last Edit : 2021.2.17
+ * Script Purpose : Setting Character(Player)'s Database
+ * 
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -10,8 +17,8 @@ public class DBManager_Player : MonoBehaviour
 
     public int ID; // Character ID
     public string characterName;
-    public int damage;
-    public int hp;
+    public float damage;
+    public float hp;
     public float attackSpeed;
     public int attackRange;
     public int attackRadius;
@@ -27,7 +34,7 @@ public class DBManager_Player : MonoBehaviour
     public void LoadingCharacterData(int ID)
     {
         isLoaded = false;
-        StartCoroutine(DataGet("http://localhost/WinterPenguin_Huma/CharactersDB.php", ID));
+        StartCoroutine(DataGet("http://220.127.167.244:8080//WinterPenguin_Huma/CharactersDB.php", ID));
 
     }
 
@@ -43,8 +50,8 @@ public class DBManager_Player : MonoBehaviour
         characters = www.downloadHandler.text.Split(';');
 
         characterName = GetDataValue(characters[_index], "Name:");
-        hp = Convert.ToInt32(GetDataValue(characters[_index], "HP:"));
-        damage = Convert.ToInt32(GetDataValue(characters[_index], "Damage:"));
+        hp = Convert.ToSingle(GetDataValue(characters[_index], "HP:"));
+        damage = Convert.ToSingle(GetDataValue(characters[_index], "Damage:"));
         attackSpeed = Convert.ToSingle(GetDataValue(characters[_index], "AttackSpeed:"));
         attackRange = Convert.ToInt32(GetDataValue(characters[_index], "AttackRange:"));
         attackRadius = Convert.ToInt32(GetDataValue(characters[_index], "AttackRadius:"));

@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿/*
+ * 
+ * EDITOR : KIM Ji hun 
+ * Last Edit : 2021.2.17
+ * Script Purpose : Player moving, rotating Controller
+ * 
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
