@@ -1,7 +1,7 @@
 ﻿/*
  * 
  * EDITOR : KIM Ji hun 
- * Last Edit : 2021.2.18
+ * Last Edit : 2021.2.19
  * Script Purpose : Setting Character(Player)'s status
  * 
  */
@@ -19,12 +19,13 @@ public class Character_SuHyeon : Player
     public bool ActivatingPlayer
     {
         get { return activatingPlayer; }
-        set { 
+        set
+        {
             activatingPlayer = value;
 
             if (activatingPlayer)
             {
-                if(CheckActivityCoroutine == null)
+                if (CheckActivityCoroutine == null)
                     CheckActivityCoroutine = StartCoroutine(CheckActivity());
             }
             else
@@ -36,8 +37,9 @@ public class Character_SuHyeon : Player
     }
 
     #region Coroutine
-    Coroutine AttackCoroutine;
+    //Coroutine AttackCoroutine; /* [Obsoleted] Use CharacterController -> characterCont.AttackCoroutine */
     Coroutine CheckActivityCoroutine;
+    Coroutine EncroachCoroutine;
     #endregion
 
     private void Start()
@@ -82,14 +84,15 @@ public class Character_SuHyeon : Player
     {
         while (ActivatingPlayer)
         {
-            if (Input.GetKeyDown(KeyCode.Z))
-            {
-                if(AttackCoroutine == null)
-                {
-                    AttackCoroutine = StartCoroutine(Attack());
 
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (EncroachCoroutine == null)
+                {
+                    EncroachCoroutine = StartCoroutine(Encroach());
                 }
             }
+
             yield return null;
         }
     }
@@ -107,45 +110,88 @@ public class Character_SuHyeon : Player
     /// Activate Coroutine When Player want to play basic attack
     /// </summary>
     /// <returns></returns>
-    private IEnumerator Attack()
+    public override IEnumerator Attack()
     {
-        Debug.Log("AttackCoroutine Start");
-        playerDir = Player.transform.forward.normalized;
         currentAngle = 22.5f;
         radius = 3;
         rotAngle = 45 / segments; // Each angles that rotate every ray the player shoot
-        float x; // Ray destination x for each seconds;
-        float y; // Ray destination y for each seconds;
-
-        for (float i = currentAngle; i > -22.5f; i -= rotAngle)
+        playerDir = Player.transform.forward;
+        for (float i = currentAngle; i >= -22.5f; i -= rotAngle)
         {
-            Quaternion startDir = Quaternion.AngleAxis(currentAngle, Vector3.up); // Rotate Ray Dir to Calc attack range -22.5f ~ 22.5f (Total 45 degree)
-            Vector3 startPos = startDir * playerDir * radius;
-            Vector3 direction = startPos - Player.transform.position;
+            Quaternion rayDir = Quaternion.AngleAxis(i, Vector3.up); // Rotate Ray Dir to Calc attack range -22.5f ~ 22.5f (Total 45 degree)
+            Vector3 endPos = rayDir * playerDir * radius;
+            Debug.DrawRay(Player.transform.position, endPos, Color.yellow, 1f);
             RaycastHit hit;
-            if(Physics.Raycast(Player.transform.position, direction, out hit))
+            if (Physics.Raycast(Player.transform.position, endPos, out hit, radius))
             {
-                if (hit.transform.CompareTag("Zombie")) // If ray hit the monster
+                if (hit.transform.CompareTag("Spiter")) // If ray hit the monster
                 {
-                    if(monsterList.Count <= AtkCount)
+                    Debug.Log("Spiter Hitted");
+                    if (monsterList.Count < AtkCount && !monsterList.Contains(hit.transform.gameObject))
                     {
                         monsterList.Add(hit.transform.gameObject); // Add monster GameObject in the list
+                        Debug.Log(monsterList.Count);
                     }
                     else
                     {
                         break; // If monsterList contains 5 monsters, Just stop shooting ray
                     }
                 }
-            }
-            Debug.DrawRay(Player.transform.position, direction, Color.yellow, 1f);
+            }   
+            
         }
 
-        for(int i = 0; i < monsterList.Count; i++)
+        for (int i = 0; i < monsterList.Count; i++)
         {
-            //monsterList[i].GetComponent<MonsterManager>().hp
+
         }
         yield return new WaitForSeconds(AtkSpeed);
-        AttackCoroutine = null;
+        characterCont.AttackCoroutine = null;
+        characterCont.isAttacking = false;
+        yield return null;
+    }
+
+    private float DamageCalc()
+    {
+        float damage = 0;
+        float critical;
+
+
+
+        return damage;
+    }
+
+    /// <summary>
+    /// Player Kim's original skill
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator Encroach()
+    {
+        float timer = 0;
+        AtkDamage += 10;
+        BloodSucking += 20;
+        var speedUp = AtkSpeed * 0.3f;
+        AtkSpeed += speedUp;
+
+
+
+        while (timer <= 20)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        AtkDamage -= 10;
+        BloodSucking -= 20;
+        AtkSpeed -= speedUp;
+
+        while (timer <= 60)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        EncroachCoroutine = null;
+
         yield return null;
     }
 }

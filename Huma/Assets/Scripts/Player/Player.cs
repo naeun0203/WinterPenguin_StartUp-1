@@ -1,7 +1,7 @@
 ﻿/*
  * 
  * EDITOR : KIM Ji hun 
- * Last Edit : 2021.2.17
+ * Last Edit : 2021.2.19
  * Script Purpose : All characeter's parent Script
  * 
  */
@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
             }
         }
     }
+
+    public virtual IEnumerator Attack() { yield return null; }
 
     public float HpChanged(float damage)
     {

@@ -238,6 +238,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2907287937100811278, guid: 3df6b6d75d8c8234693eb4d1935c0961,
+        type: 3}
+      propertyPath: rotSpeed
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 2907287937100811279, guid: 3df6b6d75d8c8234693eb4d1935c0961,
         type: 3}
       propertyPath: m_Name
@@ -655,7 +660,7 @@ PrefabInstance:
         type: 3}
       propertyPath: slotmachinePanel
       value: 
-      objectReference: {fileID: 1240381021}
+      objectReference: {fileID: 0}
     - target: {fileID: 7668239596960597289, guid: 1681adda0d4f25f44a60fa529ed2a1b4,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1392,12 +1397,6 @@ Transform:
   m_Father: {fileID: 1376392408}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1240381021 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7668239598282273514, guid: 1681adda0d4f25f44a60fa529ed2a1b4,
-    type: 3}
-  m_PrefabInstance: {fileID: 1033053729}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1316717672
 PrefabInstance:
   m_ObjectHideFlags: 0
