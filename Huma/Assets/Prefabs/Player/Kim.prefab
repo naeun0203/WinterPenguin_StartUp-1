@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83c7d7dba7026bf4faaa4134899cc883, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAttacking: 0
   speed: 10
   Player: {fileID: 2631760721508395465}
   rotSpeed: 0.1
@@ -78,6 +79,8 @@ MonoBehaviour:
   PlayerDB: {fileID: 0}
   Player: {fileID: 2631760721508395465}
   radius: 0
+  rotAngle: 0
+  segments: 60
 --- !u!54 &5216131495111924425
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -180,6 +183,16 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 2907287937100811279}
+    - target: {fileID: 8719794847007103207, guid: fe62ee57297d0b143a4951384b68b384,
+        type: 3}
+      propertyPath: hpBarPivot
+      value: 
+      objectReference: {fileID: 3444748773381976947}
+    - target: {fileID: 8719794847007103207, guid: fe62ee57297d0b143a4951384b68b384,
+        type: 3}
+      propertyPath: hpbarImage
+      value: 
+      objectReference: {fileID: 7360024527319668714}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe62ee57297d0b143a4951384b68b384, type: 3}
 --- !u!4 &2319061672287691012 stripped
@@ -188,6 +201,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1634803498206936251}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7360024527319668714 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8109841974007016273, guid: fe62ee57297d0b143a4951384b68b384,
+    type: 3}
+  m_PrefabInstance: {fileID: 1634803498206936251}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2901599913011336344
 PrefabInstance:
   m_ObjectHideFlags: 0

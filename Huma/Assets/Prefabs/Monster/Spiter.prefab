@@ -151,7 +151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpitSpeed: 1
   SpitListSize: 3
-  Spit: {fileID: 4281115044050263875, guid: 542c261186fbdcd4daff65b48fb3cd7e, type: 3}
+  Spit: {fileID: 8730647438071668295, guid: 203d022c238e2f34383af6133fc73d5f, type: 3}
   SpiterMouth: {fileID: 4203340473988884551}
 --- !u!195 &4203340473837967045
 NavMeshAgent:
