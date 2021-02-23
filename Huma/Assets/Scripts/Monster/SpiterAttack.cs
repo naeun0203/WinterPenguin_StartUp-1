@@ -1,6 +1,6 @@
 ﻿//************************************************
 // EDITOR : JNE
-// LAST EDITED DATE : 2020.01.30
+// LAST EDITED DATE : 2020.02.22
 // Script Purpose : Monster_Spiter Attack, Spit parabola
 //******************************************************
 using System.Collections;
@@ -9,26 +9,25 @@ using UnityEngine;
 
 public class SpiterAttack : MonoBehaviour
 {
-    private float nextTime = 0.0f;
-    public float AttackSpeed = 2.0f;
+    //public float AttackSpeed = 2.0f;
     public float SpitSpeed = 1.0f;
-    public float SpitListSize = 10;
+    public float SpitListSize = 3;
 
     private Transform playerTransform;
 
     private float firingAngle = 45.0f;
     private float gravity = 9.8f;
 
-    MonsterManager monManager;
     List<GameObject> SpitList;
     public GameObject Spit;
     public GameObject SpiterMouth;
 
+    MonsterBase AtkSpit;
 
     void Start()
     {
         playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
-        monManager = this.gameObject.GetComponent<MonsterManager>();
+        AtkSpit = this.gameObject.GetComponent<MonsterBase>();
         SpitList = new List<GameObject>();
         for (int i = 0; i < SpitListSize; i++)
         {
@@ -40,13 +39,9 @@ public class SpiterAttack : MonoBehaviour
 
     void Update()
     {
-        if (monManager.isAttack == true)
+        if (AtkSpit.isAttack == true)
         {
-            if (Time.time > nextTime)
-            {
-                nextTime = Time.time + AttackSpeed;
-                Fire();
-            }
+            Fire();
         }
 
     }
@@ -54,7 +49,7 @@ public class SpiterAttack : MonoBehaviour
     {
         for (int i = 0; i < SpitList.Count; i++)
         {
-            if(!SpitList[i].activeInHierarchy)
+            if (!SpitList[i].activeInHierarchy)
             {
                 SpitList[i].transform.position = SpiterMouth.transform.position;
                 SpitList[i].transform.rotation = SpiterMouth.transform.rotation;
@@ -81,7 +76,7 @@ public class SpiterAttack : MonoBehaviour
         SpitList[i].transform.rotation = Quaternion.LookRotation(Player - SpitList[i].transform.position);
         float elapse_time = 0;
 
-        while (elapse_time < flightDuration )
+        while (elapse_time < flightDuration)
         {
             SpitList[i].transform.Translate(0, (Vy - (gravity * elapse_time)) * Time.deltaTime, Vx * Time.deltaTime);
 

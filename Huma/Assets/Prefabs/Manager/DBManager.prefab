@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8592145998926541207}
   - component: {fileID: 6205800432701839329}
+  - component: {fileID: 4815643945507382849}
   m_Layer: 0
   m_Name: DBManager
   m_TagString: Untagged
@@ -56,3 +57,17 @@ MonoBehaviour:
   moveSpeed: 0
   NumberOfTargets: 0
   skillCoolTime: 0
+  isLoaded: 0
+--- !u!114 &4815643945507382849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6622583245878319263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73fc309315d6ef14f958c2f24d25324c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Monster: []
