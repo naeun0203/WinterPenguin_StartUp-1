@@ -396,7 +396,7 @@ MonoBehaviour:
   gamemanager: {fileID: 0}
   waves:
   - name: Spiter
-    enemy: {fileID: 0}
+    enemy: {fileID: 284950198}
     count: 5
     rate: 2.173913
   spawnPoints:
