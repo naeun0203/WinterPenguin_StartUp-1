@@ -1,11 +1,19 @@
-﻿using System.Collections;
+﻿/*
+ * 
+ * EDITOR : KIM Ji hun 
+ * Last Edit : 2021.2.19
+ * Script Purpose : All characeter's parent Script
+ * 
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public bool isDead = false;
-    private float hp;
+    public bool activatingPlayer; // Is current Playing character can move or activate now?
+    public bool isDead = false; // Is Character dead?
+    private float hp; // Player HP
     public float HP
     {
         get { return hp; }
@@ -18,6 +26,8 @@ public class Player : MonoBehaviour
             }
         }
     }
+
+    public virtual IEnumerator Attack() { yield return null; }
 
     public float HpChanged(float damage)
     {
