@@ -5,6 +5,9 @@ using UnityEngine;
 public class SlotControl : MonoBehaviour
 {
     public int RandomReward = 0;
+    public GameObject Slot;
+    public GameObject SlotObject;
+    private Transform SlotObj;
 
     public int StopValue;
     private float timeInterval;
@@ -14,11 +17,13 @@ public class SlotControl : MonoBehaviour
 
     private void Start()
     {
-        this.gameObject.SetActive(false);
+        SlotObj = SlotObject.transform;
+        Slot.SetActive(false);
         rowStopped = true;
     }
     public void StartRotating()
     {
+        SlotObj.localPosition = new Vector3(0, 0, 0);
         stoppedSlot = "";
         StartCoroutine(Rotate());
     }
@@ -29,10 +34,10 @@ public class SlotControl : MonoBehaviour
         for(int i = 0; i < (10*2)*3; i++)
         {
 
-            if (transform.localPosition.y <= 0f)
-                transform.localPosition = new Vector3(0, 1500f, 0);
+            if (SlotObj.localPosition.y <= 0f)
+                SlotObj.localPosition = new Vector3(0, 1500f, 0);
 
-            transform.localPosition -= new Vector3(0, 50f, 0);
+            SlotObj.localPosition -= new Vector3(0, 50f, 0);
 
             yield return new WaitForSeconds(timeInterval);
         }
@@ -83,10 +88,10 @@ public class SlotControl : MonoBehaviour
 
         for (int i = 0; i < StopValue; i++)
         {
-            if(transform.localPosition.y <= 0f)
-                transform.localPosition = new Vector3(0, 1500f, 0);
+            if(SlotObj.localPosition.y <= 0f)
+                SlotObj.localPosition = new Vector3(0, 1500f, 0);
 
-            transform.localPosition -= new Vector3(0, 50f, 0);
+            SlotObj.localPosition -= new Vector3(0, 50f, 0);
 
             if (i > Mathf.RoundToInt(StopValue * 0.5f))
                 timeInterval = 0.05f;
