@@ -26,7 +26,7 @@ public class EnemyHpBar : MonoBehaviour
         cam = Camera.main.transform;
 
         currentHp = maxHp;
-        hpbarPivot.gameObject.SetActive(false);
+        hpbarPivot.gameObject.SetActive(true);
     }
     private void Update()
     {
