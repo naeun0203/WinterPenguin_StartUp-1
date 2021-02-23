@@ -185,6 +185,11 @@ PrefabInstance:
       objectReference: {fileID: 2907287937100811279}
     - target: {fileID: 8719794847007103207, guid: fe62ee57297d0b143a4951384b68b384,
         type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 4006911343144991842}
+    - target: {fileID: 8719794847007103207, guid: fe62ee57297d0b143a4951384b68b384,
+        type: 3}
       propertyPath: hpBarPivot
       value: 
       objectReference: {fileID: 3444748773381976947}
