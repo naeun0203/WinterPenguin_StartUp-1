@@ -36,4 +36,9 @@ public class InGameMenu : MonoBehaviour
     {
         settingMenu.SetActive(true);
     }
+    public void ContinueActivation()
+    {
+        subMenu.SetActive(false);
+        Time.timeScale = 1;
+    }
 }

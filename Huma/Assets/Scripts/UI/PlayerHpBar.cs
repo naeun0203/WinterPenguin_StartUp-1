@@ -5,50 +5,50 @@ using UnityEngine.UI;
 
 public class PlayerHpBar : MonoBehaviour
 {
-    private float maxHp;//
+    public float maxHp;//
     private Transform cam;
+    private DBManager_Player PlayerDB;
 
-
-    public GameObject Player;
-    public Image healthbarImage;
-    public Transform hpbarPivot;
-    //public float activeTime = 5f;
+    [SerializeField]
+    private Image hpbarImage;
+    [SerializeField]
+    private Transform hpBarPivot;
+    [SerializeField]
     private float currentHp;
+    [SerializeField]
+    private float lerpSpeed = 0.5f;
 
     private Vector3 lookPosition;
-
+    Player player = new Player();
     public void Start()
     {
+        
+        PlayerDB = GameObject.Find("DBManager").GetComponent<DBManager_Player>();
         cam = Camera.main.transform;
 
-        maxHp = Player.GetComponent<Player>().HP;
+        player.HP = PlayerDB.hp;
+        maxHp = player.HP;
         currentHp = maxHp;
-        hpbarPivot.gameObject.SetActive(true);
+
+        hpbarImage.fillAmount = 1;//
+        hpBarPivot.gameObject.SetActive(true);
     }
     private void Update()
     {
+        currentHp = player.HP;
+        /*
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            player.HpChanged(10);
+        }*/
         if (maxHp != currentHp)
         {
-            StartCoroutine(ChangeHealth());
-            currentHp = maxHp;
+            hpbarImage.fillAmount = Mathf.Lerp(hpbarImage.fillAmount, currentHp / maxHp, Time.deltaTime * lerpSpeed);
         }
-    }
-    private IEnumerator ChangeHealth()
-    {
-        float changeHp = healthbarImage.fillAmount;
-        float elapsed = 0f;
-
-        while (elapsed < 0.5f)
-        {
-            elapsed += Time.deltaTime;
-            healthbarImage.fillAmount = Mathf.Lerp(changeHp, currentHp / maxHp, elapsed / 0.5f);
-            yield return null;
-        }
-        //healthbarImage.fillAmount = health.currentHealth / health.maxHealth;
     }
     private void LateUpdate()
     {
-        lookPosition = new Vector3(hpbarPivot.transform.position.x, cam.position.y, cam.position.z);
-        hpbarPivot.transform.LookAt(lookPosition);
+        lookPosition = new Vector3(hpBarPivot.transform.position.x, cam.position.y, cam.position.z);
+        hpBarPivot.transform.LookAt(lookPosition);
     }
 }
