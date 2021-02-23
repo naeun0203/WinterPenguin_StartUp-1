@@ -4,9 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Spiter
-  - Zombie
   - wall
+  - Monster
   layers:
   - Default
   - TransparentFX

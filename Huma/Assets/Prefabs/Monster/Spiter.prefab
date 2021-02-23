@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 4203340473837967045}
   m_Layer: 8
   m_Name: Spiter
-  m_TagString: Spiter
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
