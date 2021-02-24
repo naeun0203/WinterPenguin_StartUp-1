@@ -3,6 +3,7 @@
 // LAST EDITED DATE : 2020.02.22
 // Script Purpose : Monster_Base
 //******************************************************
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,14 +11,24 @@ using UnityEngine.AI;
 
 public class MonsterBase : MonoBehaviour
 {
-    public enum Tribe { Zombie, DevliDog, Spiter };
+    public enum Tribe { Zombie, DevliDog, Spiter, tanker };
     public enum State { Idle, Move, Attack };
 
-    public float HP = 100f;
-    public float Damage = 10f;
-    public float AttackRange = 1.5f;
-    public float moveSpeed = 9f;
-    public float AttackSpeed = 2f;
+    [SerializeField] private DBManager_Monster MonsterData;
+    [SerializeField] private GameObject Monster;
+
+    public float HP;
+    [SerializeField] protected float Damage;
+    [SerializeField] protected float AttackSpeed;
+    [SerializeField] protected float AttackRange;
+    [SerializeField] protected float AttackRadius;
+    [SerializeField] protected float BloodSucking;
+    [SerializeField] protected float moveSpeed;
+    [SerializeField] protected float NumberOfTargets;
+    [SerializeField] protected float skillCoolTime;
+    [SerializeField] protected float EXP;
+
+
 
     protected float AttackCoolTimeCacl = 2f;
     protected bool canAtk = true;
@@ -35,13 +46,46 @@ public class MonsterBase : MonoBehaviour
 
     protected void Start()
     {
+        MonsterData = GameObject.Find("DBManager").GetComponent<DBManager_Monster>();
         Player = GameObject.FindGameObjectWithTag("Player");
         nvAgent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         StartCoroutine(CalcCoolTime());
         StartCoroutine(CheckStateForActon());
+        StartCoroutine(DataSet());
         this.nvAgent.stoppingDistance = AttackRange;
         this.nvAgent.speed = moveSpeed;
+    }
+    protected IEnumerator DataSet()
+    {
+        bool DataLoading = true;
+
+        while (DataLoading)
+        {
+            for(int i = 0; i < MonsterData.monsterDB.Length; i++)
+            {
+                if (MonsterData.monsterDB[i].name == CurrentTribe.ToString())
+                {
+                    HP = MonsterData.monsterDB[i].hp;
+                    Damage = MonsterData.monsterDB[i].damage;
+                    AttackSpeed = MonsterData.monsterDB[i].attackSpeed;
+                    AttackRange = MonsterData.monsterDB[i].attackRange;
+                    AttackRadius = MonsterData.monsterDB[i].attackRadius;
+                    BloodSucking = MonsterData.monsterDB[i].bloodSucking;
+                    moveSpeed = MonsterData.monsterDB[i].moveSpeed;
+                    NumberOfTargets = MonsterData.monsterDB[i].NumberOfTargets;
+                    skillCoolTime = MonsterData.monsterDB[i].skillCoolTime;
+                    EXP = MonsterData.monsterDB[i].EXP;
+
+                    DataLoading = false;
+                }
+            }
+            yield return null;
+        }
+
+        nvAgent.speed = moveSpeed;
+        nvAgent.stoppingDistance = AttackRange;
+        yield return null;
     }
     protected bool CanAtkStateFun()
     {

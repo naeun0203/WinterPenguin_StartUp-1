@@ -11,7 +11,8 @@ public class MonsterMelee : MonsterBase
 {
     public GameObject meleeAtkArea;
     protected Vector3 Look;
-
+    Vector3 pushDirection;
+    private float hp;
     void Start()
     {
         base.Start();
@@ -24,14 +25,38 @@ public class MonsterMelee : MonsterBase
         Look = new Vector3(Player.transform.position.x, transform.position.y, Player.transform.position.z);
         transform.LookAt(Look);
 
-        if (HP <= 0)
+/*        if (HP <= 0)
         {
             this.nvAgent.isStopped = true;
             rb.gameObject.SetActive(false);
             Destroy(transform.parent.gameObject);
             return;
+        }*/
+    }
+    public float HP
+    {
+        get { return hp; }
+        set
+        {
+            hp = value;
+            if (hp <= 0)
+            {
+                this.nvAgent.isStopped = true;
+                rb.gameObject.SetActive(false);
+                Destroy(transform.parent.gameObject);
+            }
         }
     }
+
+    public float HpChanged(float damage)
+    {
+        rb = GetComponent<Rigidbody>();
+        pushDirection = Vector3.forward * -10;
+        rb.AddForce(pushDirection * 100);
+        HP -= damage;
+        return HP;
+    }
+
     IEnumerator ResetAtkArea()
     {
         while (true)
