@@ -102,11 +102,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b78145e3bfedc4498e3eedbf8f2e827, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MonsterData: {fileID: 0}
+  Monster: {fileID: 3306856514043344784}
   HP: 75
   Damage: 10
-  AttackRange: 5
-  moveSpeed: 9
   AttackSpeed: 3
+  AttackRange: 5
+  AttackRadius: 0
+  BloodSucking: 0
+  moveSpeed: 9
+  NumberOfTargets: 0
+  skillCoolTime: 0
+  EXP: 0
   isAttack: 0
   CurrentTribe: 2
   CurrentState: 0
@@ -261,6 +268,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89a03de3e5831174d81c90a610da2402, type: 3}
+--- !u!1 &3306856514043344784 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 89a03de3e5831174d81c90a610da2402,
+    type: 3}
+  m_PrefabInstance: {fileID: 2388378585178065601}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2787588351917370666 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 89a03de3e5831174d81c90a610da2402,
