@@ -11,17 +11,11 @@ public class MonsterMelee : MonsterBase
 {
     public GameObject meleeAtkArea;
     protected Vector3 Look;
-    Vector3 pushDirection;
-    private float hp;
-
-    protected Animator Anim;
 
     void Start()
     {
         base.Start();
         AttackCoolTimeCacl = AttackSpeed;
-
-        Anim = GetComponent<Animator>();
 
         StartCoroutine(FSM());
         StartCoroutine(ResetAtkArea());
@@ -32,37 +26,8 @@ public class MonsterMelee : MonsterBase
         transform.LookAt(Look);
 
     }
-    public float HP
-    {
-        get { return hp; }
-        set
-        {
-            hp = value;
-            if (hp <= 0)
-            {
-                this.nvAgent.isStopped = true;
-                rb.gameObject.SetActive(false);
-                if (!Anim.GetCurrentAnimatorStateInfo(0).IsName("Death"))
-                {
-                    Anim.SetTrigger("Death");
-                }
-                Destroy(transform.parent.gameObject);
-            }
-        }
-    }
 
-    public float HpChanged(float damage)
-    {
-        rb = GetComponent<Rigidbody>();
-        HP += damage;
-        pushDirection = Vector3.forward * -10;
-        rb.AddForce(pushDirection * 100);
-        if (!Anim.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
-        {
-            Anim.SetTrigger("Hit");
-        }
-        return HP;
-    }
+
 
     IEnumerator ResetAtkArea()
     {
