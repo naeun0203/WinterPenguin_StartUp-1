@@ -31,7 +31,7 @@ public class SpiterSpit : MonoBehaviour
         else if (collision.tag == "Player")
         {
             gameObject.SetActive(false);          
-            player.HpChanged(damage);
+            player.HpChanged(-damage);
         }
     }
 }

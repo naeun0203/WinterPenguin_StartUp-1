@@ -17,7 +17,6 @@ public class MonsterBase : MonoBehaviour
     [SerializeField] private DBManager_Monster MonsterData;
     [SerializeField] private GameObject Monster;
 
-    public float HP;
     [SerializeField] protected float Damage;
     [SerializeField] protected float AttackSpeed;
     [SerializeField] protected float AttackRange;
@@ -37,6 +36,9 @@ public class MonsterBase : MonoBehaviour
     protected GameObject Player;
     protected Player player;
     protected NavMeshAgent nvAgent;
+    protected Animator Anim;
+    protected Vector3 pushDirection;
+
     protected float distance;
 
     protected Rigidbody rb;
@@ -44,6 +46,7 @@ public class MonsterBase : MonoBehaviour
     public Tribe CurrentTribe = Tribe.Zombie;
     public State CurrentState = State.Idle;
 
+    private float hp;
     protected void Start()
     {
         MonsterData = GameObject.Find("DBManager").GetComponent<DBManager_Monster>();
@@ -52,6 +55,7 @@ public class MonsterBase : MonoBehaviour
 
         nvAgent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
+        Anim = GetComponent<Animator>();
 
         StartCoroutine(CalcCoolTime());
         StartCoroutine(CheckStateForActon());
@@ -59,6 +63,7 @@ public class MonsterBase : MonoBehaviour
         this.nvAgent.stoppingDistance = AttackRange;
         this.nvAgent.speed = moveSpeed;
     }
+
     protected IEnumerator DataSet()
     {
         bool DataLoading = true;
@@ -90,6 +95,44 @@ public class MonsterBase : MonoBehaviour
         nvAgent.stoppingDistance = AttackRange;
         yield return null;
     }
+    #region HP
+    public float HP
+    {
+        get { return hp; }
+        set
+        {
+            hp = value;
+            if (hp <= 0)
+            {
+                this.nvAgent.isStopped = true;
+
+                Anim.SetTrigger("Death");
+
+                this.gameObject.SetActive(false);
+                //Invoke("Death", 2);
+            }
+        }
+    }
+/*    void Death()
+    {
+        rb.gameObject.SetActive(false);
+        this.gameObject.SetActive(false);
+    }*/
+
+    public float HpChanged(float damage)
+    {
+        rb = GetComponent<Rigidbody>();
+        HP += damage;
+
+        pushDirection = Vector3.forward * -10;
+        rb.AddForce(pushDirection * 100);
+
+        Anim.SetTrigger("Hit");
+
+        return HP;
+    }
+    #endregion
+
     protected bool CanAtkStateFun()
     {
 
@@ -148,7 +191,7 @@ public class MonsterBase : MonoBehaviour
                     {
                         Damage = 0;
                     }
-                    player.HpChanged(Damage);
+                    player.HpChanged(-Damage);
                     break;
 
             }
