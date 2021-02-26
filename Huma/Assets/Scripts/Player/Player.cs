@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
 
     public float HpChanged(float damage)
     {
-        HP -= damage;
+        HP += damage;
         return HP;
     }
 

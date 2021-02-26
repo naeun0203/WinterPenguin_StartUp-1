@@ -14,7 +14,10 @@ using System;
 public class DBManager_Player : MonoBehaviour
 {
     private string[] characterArr;
+    private string[] expArr;
 
+    public enum PlayerID { kim = 0 }
+    public PlayerID playerID;
     public int ID; // Character ID
     public string characterName;
     public float damage;
@@ -36,13 +39,47 @@ public class DBManager_Player : MonoBehaviour
 
     public bool isLoaded = false;
 
+    /// <summary>
+    /// Load Character Data(EXP,Status) from Server 
+    /// </summary>
+    /// <param name="ID">Player's Character ID in DB</param>
     public void LoadingCharacterData(int ID)
     {
         isLoaded = false;
-        StartCoroutine(PlayerDataGet("http://220.127.167.244:8080//WinterPenguin_Huma/CharactersDB.php",ID));
+        ID = (int)playerID;
+        StartCoroutine(PlayerDataGet("http://220.127.167.244:8080/WinterPenguin_Huma/CharactersDB.php",ID));
+        StartCoroutine(ExpDataGet("http://220.127.167.244:8080/WinterPenguin_Huma/PlayerExpDB.php", ID));
+    }
+
+    /// <summary>
+    /// Get Exp value from Server
+    /// </summary>
+    /// <param name="_url">url of Player's EXP php file</param>
+    /// <param name="_index">ID of Player Character</param>
+    /// <returns></returns>
+    private IEnumerator ExpDataGet(string _url, int _index)
+    {
+        UnityWebRequest www = UnityWebRequest.Get(_url);
+        yield return www.SendWebRequest();
+
+        if (www.error != null)
+            Debug.Log(www.error.ToString());
+
+        expArr = www.downloadHandler.text.Split(';');
+
+        for(int i = 2; i < GetDataValue(expArr[_index]).Length; i++) // ID와 Name 을 건너뛰고 lv.2 경험치부터 가져오기
+        {
+            ExpList.Add(Convert.ToSingle(GetDataValue(expArr[_index])[i]));
+        }
 
     }
 
+    /// <summary>
+    /// Get Player status value from Server
+    /// </summary>
+    /// <param name="_characterUrl">url of Player's status php file</param>
+    /// <param name="_index">ID of Player Character</param>
+    /// <returns></returns>
     private IEnumerator PlayerDataGet(string _characterUrl, int _index)
     {
         UnityWebRequest charData = UnityWebRequest.Get(_characterUrl);
@@ -69,6 +106,12 @@ public class DBManager_Player : MonoBehaviour
         isLoaded = true;
     }
 
+    /// <summary>
+    /// Substring Each value of php file
+    /// </summary>
+    /// <param name="data">One part of DB file</param>
+    /// <param name="index">Wanted Collumn line number of DB</param>
+    /// <returns></returns>
     string GetDataValue(string data, string index)
     {
         string value = data.Substring(data.IndexOf(index)+index.Length) ;
@@ -77,9 +120,14 @@ public class DBManager_Player : MonoBehaviour
         return value;
     }
 
-    private List<float> GetExpValue()
+    /// <summary>
+    /// Substring Each value of php file
+    /// </summary>
+    /// <param name="data">One part of DB file</param>
+    /// <returns></returns>
+    string[] GetDataValue(string data)
     {
-        //ExpList = 
-        return ExpList;
+        string[] value = data.Split('|');
+        return value;
     }
 }
