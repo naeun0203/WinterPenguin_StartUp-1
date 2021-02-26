@@ -9,15 +9,16 @@ using UnityEngine;
 
 public class SpiterSpit : MonoBehaviour
 {
+    [SerializeField] private DBManager_Monster MonsterData;
+    Player player;
 
-    MonsterBase SpitDamage;
-    protected float damage;
-
-
+    private float damage;
     void Start()
     {
-        SpitDamage = GameObject.Find("Monster").GetComponent<MonsterBase>();
-        //damage = SpitDamage.Damage;
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        MonsterData = GameObject.Find("DBManager").GetComponent<DBManager_Monster>();
+
+        damage = MonsterData.monsterDB[2].damage;
     }
 
 
@@ -29,11 +30,8 @@ public class SpiterSpit : MonoBehaviour
         }
         else if (collision.tag == "Player")
         {
-            gameObject.SetActive(false);
-            /*
-                        Player player = new Player();
-                        player.HpChanged(damage);
-            */
+            gameObject.SetActive(false);          
+            player.HpChanged(damage);
         }
     }
 }

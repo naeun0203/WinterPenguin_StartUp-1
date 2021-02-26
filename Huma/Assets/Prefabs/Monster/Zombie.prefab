@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 6626239962232015540}
   - component: {fileID: 6626239962232015539}
   - component: {fileID: 6626239962232015538}
+  - component: {fileID: 1254463239924391908}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Monster
@@ -92,7 +93,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -146,6 +147,25 @@ MonoBehaviour:
   CurrentTribe: 0
   CurrentState: 0
   meleeAtkArea: {fileID: 2385348140596097841}
+--- !u!95 &1254463239924391908
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6626239962232015537}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &6626239961778017854
 PrefabInstance:
   m_ObjectHideFlags: 0

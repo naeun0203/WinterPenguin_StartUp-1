@@ -12,7 +12,7 @@ using System;
 [System.Serializable]
 public struct MonsterDB
 {
-    public enum MonsterType { Zombie, DevilDog, Spiter, tanker };
+    public enum MonsterType { Zombie, DevilDog, Spiter, Tanker };
 
     [SerializeField]
     public MonsterType monsterType;

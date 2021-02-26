@@ -11,7 +11,7 @@ using UnityEngine.AI;
 
 public class MonsterBase : MonoBehaviour
 {
-    public enum Tribe { Zombie, DevliDog, Spiter, tanker };
+    public enum Tribe { Zombie, DevilDog, Spiter, Tanker };
     public enum State { Idle, Move, Attack };
 
     [SerializeField] private DBManager_Monster MonsterData;
@@ -35,11 +35,11 @@ public class MonsterBase : MonoBehaviour
     public bool isAttack = false;
 
     protected GameObject Player;
+    protected Player player;
     protected NavMeshAgent nvAgent;
     protected float distance;
 
     protected Rigidbody rb;
-
 
     public Tribe CurrentTribe = Tribe.Zombie;
     public State CurrentState = State.Idle;
@@ -47,9 +47,12 @@ public class MonsterBase : MonoBehaviour
     protected void Start()
     {
         MonsterData = GameObject.Find("DBManager").GetComponent<DBManager_Monster>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         Player = GameObject.FindGameObjectWithTag("Player");
+
         nvAgent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
+
         StartCoroutine(CalcCoolTime());
         StartCoroutine(CheckStateForActon());
         StartCoroutine(DataSet());
@@ -141,6 +144,11 @@ public class MonsterBase : MonoBehaviour
                     break;
                 case State.Attack:
                     isAttack = true;
+                    if(CurrentTribe == Tribe.Spiter)
+                    {
+                        Damage = 0;
+                    }
+                    player.HpChanged(Damage);
                     break;
 
             }
