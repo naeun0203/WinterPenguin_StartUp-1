@@ -143,7 +143,7 @@ public class Character_SuHyeon : Player
         for (int i = 0; i < monsterList.Count; i++)
         {
             //Attack to each monster
-            monsterList[i].GetComponent<MonsterMelee>().HP -= AtkDamage;
+            //monsterList[i].GetComponent<MonsterMelee>().HpChanged(-AtkDamage);
         }
         monsterList.Clear();
 
@@ -157,8 +157,6 @@ public class Character_SuHyeon : Player
     {
         float damage = 0;
         float critical;
-
-
 
         return damage;
     }
@@ -174,8 +172,6 @@ public class Character_SuHyeon : Player
         BloodSucking += 20;
         var speedUp = AtkSpeed * 0.3f;
         AtkSpeed += speedUp;
-
-
 
         while (timer <= 20)
         {
