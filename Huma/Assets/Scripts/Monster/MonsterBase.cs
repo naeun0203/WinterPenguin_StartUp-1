@@ -148,7 +148,7 @@ public class MonsterBase : MonoBehaviour
                     {
                         Damage = 0;
                     }
-                    player.HpChanged(Damage);
+                    player.HpChanged(-Damage);
                     break;
 
             }

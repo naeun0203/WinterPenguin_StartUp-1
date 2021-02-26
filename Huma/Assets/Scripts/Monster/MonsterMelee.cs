@@ -54,13 +54,13 @@ public class MonsterMelee : MonsterBase
     public float HpChanged(float damage)
     {
         rb = GetComponent<Rigidbody>();
+        HP += damage;
         pushDirection = Vector3.forward * -10;
+        rb.AddForce(pushDirection * 100);
         if (!Anim.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
         {
             Anim.SetTrigger("Hit");
         }
-        rb.AddForce(pushDirection * 100);
-        HP -= damage;
         return HP;
     }
 
