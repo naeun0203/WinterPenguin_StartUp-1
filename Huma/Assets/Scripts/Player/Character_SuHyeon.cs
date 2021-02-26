@@ -143,7 +143,8 @@ public class Character_SuHyeon : Player
 
         for (int i = 0; i < monsterList.Count; i++)
         {
-
+            //Attack to each monster
+            monsterList[i].GetComponent<MonsterBase>().HP -= AtkDamage;
         }
         yield return new WaitForSeconds(AtkSpeed);
         characterCont.AttackCoroutine = null;
