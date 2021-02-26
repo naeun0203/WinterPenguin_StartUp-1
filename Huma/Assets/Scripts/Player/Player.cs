@@ -20,6 +20,10 @@ public class Player : MonoBehaviour
         set
         {
             hp = value;
+            if (hp > MaxHP)
+            {
+                hp = MaxHP;
+            }
             if (hp <= 0)
             {
                 isDead = true;
@@ -35,6 +39,7 @@ public class Player : MonoBehaviour
         return HP;
     }
 
+    [SerializeField] protected float MaxHP; // 최대 체력
     [SerializeField] protected float AtkDamage; // 공격력
     [SerializeField] protected float AtkSpeed; // 공격 속도
     [SerializeField] protected float AtkRange; // 공격 사거리
