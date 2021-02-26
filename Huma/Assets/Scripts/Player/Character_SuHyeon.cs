@@ -59,6 +59,7 @@ public class Character_SuHyeon : Player
         {
             if (PlayerDB.isLoaded)
             {
+                MaxHP = PlayerDB.hp; // Init Max HP
                 HP = PlayerDB.hp;
                 AtkDamage = PlayerDB.damage;
                 AtkSpeed = PlayerDB.attackSpeed;
@@ -124,13 +125,11 @@ public class Character_SuHyeon : Player
             RaycastHit hit;
             if (Physics.Raycast(Player.transform.position, endPos, out hit, radius))
             {
-                if (hit.transform.CompareTag("Spiter")) // If ray hit the monster
+                if (hit.transform.CompareTag("Monster")) // If ray hit the monster
                 {
-                    Debug.Log("Spiter Hitted");
                     if (monsterList.Count < AtkCount && !monsterList.Contains(hit.transform.gameObject))
                     {
                         monsterList.Add(hit.transform.gameObject); // Add monster GameObject in the list
-                        Debug.Log(monsterList.Count);
                     }
                     else
                     {
@@ -144,8 +143,10 @@ public class Character_SuHyeon : Player
         for (int i = 0; i < monsterList.Count; i++)
         {
             //Attack to each monster
-            monsterList[i].GetComponent<MonsterBase>().HP -= AtkDamage;
+            monsterList[i].GetComponent<MonsterMelee>().HP -= AtkDamage;
         }
+        monsterList.Clear(); // Reset Monster List
+
         yield return new WaitForSeconds(AtkSpeed);
         characterCont.AttackCoroutine = null;
         characterCont.isAttacking = false;
