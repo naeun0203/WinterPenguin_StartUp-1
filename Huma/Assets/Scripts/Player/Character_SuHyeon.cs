@@ -143,7 +143,7 @@ public class Character_SuHyeon : Player
         for (int i = 0; i < monsterList.Count; i++)
         {
             //Attack to each monster
-            //monsterList[i].GetComponent<MonsterMelee>().HpChanged(-AtkDamage);
+            monsterList[i].GetComponent<MonsterMelee>().HpChanged(-AtkDamage);
         }
         monsterList.Clear();
 
