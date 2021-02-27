@@ -18,7 +18,9 @@ public class RnadomReward : MonoBehaviour
         17,
         17
     };
-    
+    /// <summary>
+    /// 
+    /// </summary>
     public void randomSelect()
     {
         int number = Random.Range(0, 100);
