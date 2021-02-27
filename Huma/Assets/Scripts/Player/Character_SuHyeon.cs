@@ -59,7 +59,7 @@ public class Character_SuHyeon : Player
         {
             if (PlayerDB.isLoaded)
             {
-                MaxHP = PlayerDB.hp; // Init Max HP
+                MaxHP = PlayerDB.hp;
                 HP = PlayerDB.hp;
                 AtkDamage = PlayerDB.damage;
                 AtkSpeed = PlayerDB.attackSpeed;
@@ -137,14 +137,15 @@ public class Character_SuHyeon : Player
                     }
                 }
             }   
+            
         }
 
         for (int i = 0; i < monsterList.Count; i++)
         {
             //Attack to each monster
-            monsterList[i].GetComponent<MonsterMelee>().HpChanged(AtkDamage);
+            //monsterList[i].GetComponent<MonsterMelee>().HpChanged(-AtkDamage);
         }
-        monsterList.Clear(); // Reset Monster List
+        monsterList.Clear();
 
         yield return new WaitForSeconds(AtkSpeed);
         characterCont.AttackCoroutine = null;
@@ -171,8 +172,6 @@ public class Character_SuHyeon : Player
         BloodSucking += 20;
         var speedUp = AtkSpeed * 0.3f;
         AtkSpeed += speedUp;
-
-
 
         while (timer <= 20)
         {
