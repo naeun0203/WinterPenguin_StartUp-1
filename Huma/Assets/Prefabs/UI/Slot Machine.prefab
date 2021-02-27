@@ -2122,6 +2122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RandomReward: 1
+  Slot: {fileID: 904932800436192856}
   SlotObject: {fileID: 6818207920249166045}
   StopValue: 0
   rowStopped: 0
