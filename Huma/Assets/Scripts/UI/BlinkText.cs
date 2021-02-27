@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class BlinkText : MonoBehaviour
 {
-    Text blinkText;
+    TextMeshProUGUI blinkText;
+    //Text blinkText;
     public float time = 2.0f;
     void Start()
     {
-        blinkText = GetComponent<Text>();
+        blinkText = GetComponent<TextMeshProUGUI>();
         StartCoroutine(FadeInText());
     }
     void Update()
