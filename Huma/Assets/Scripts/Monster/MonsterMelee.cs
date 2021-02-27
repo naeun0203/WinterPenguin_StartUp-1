@@ -11,7 +11,7 @@ public class MonsterMelee : MonsterBase
 {
     public GameObject meleeAtkArea;
     protected Vector3 Look;
-
+    public float CurrentHP;
     void Start()
     {
         base.Start();
@@ -24,7 +24,7 @@ public class MonsterMelee : MonsterBase
     {
         Look = new Vector3(Player.transform.position.x, transform.position.y, Player.transform.position.z);
         transform.LookAt(Look);
-
+        CurrentHP = HP;
     }
 
 

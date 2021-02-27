@@ -107,15 +107,16 @@ public class MonsterBase : MonoBehaviour
                 this.nvAgent.isStopped = true;
 
                 Anim.SetTrigger("Death");
-                Invoke("Death", 1);
+                this.gameObject.SetActive(false);
+                //Invoke("Death", 1);
             }
         }
     }
-    void Death()
+/*    void Death()
     {
         rb.gameObject.SetActive(false);
         this.gameObject.SetActive(false);
-    }
+    }*/
 
     public float HpChanged(float damage)
     {

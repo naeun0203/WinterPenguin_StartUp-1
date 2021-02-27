@@ -48,7 +48,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.3
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 40
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -103,7 +103,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MonsterData: {fileID: 0}
   Monster: {fileID: 3779635533706751757}
-  HP: 0
   Damage: 0
   AttackSpeed: 0
   AttackRange: 0
@@ -117,6 +116,7 @@ MonoBehaviour:
   CurrentTribe: 1
   CurrentState: 0
   meleeAtkArea: {fileID: 6805811338676958933}
+  CurrentHP: 0
 --- !u!95 &1955751088060961107
 Animator:
   serializedVersion: 3
