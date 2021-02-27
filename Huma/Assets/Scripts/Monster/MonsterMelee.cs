@@ -11,11 +11,12 @@ public class MonsterMelee : MonsterBase
 {
     public GameObject meleeAtkArea;
     protected Vector3 Look;
-
+    public float CurrentHP;
     void Start()
     {
         base.Start();
         AttackCoolTimeCacl = AttackSpeed;
+
         StartCoroutine(FSM());
         StartCoroutine(ResetAtkArea());
     }
@@ -23,15 +24,11 @@ public class MonsterMelee : MonsterBase
     {
         Look = new Vector3(Player.transform.position.x, transform.position.y, Player.transform.position.z);
         transform.LookAt(Look);
-
-        if (HP <= 0)
-        {
-            this.nvAgent.isStopped = true;
-            rb.gameObject.SetActive(false);
-            Destroy(transform.parent.gameObject);
-            return;
-        }
+        CurrentHP = HP;
     }
+
+
+
     IEnumerator ResetAtkArea()
     {
         while (true)
@@ -57,6 +54,11 @@ public class MonsterMelee : MonsterBase
     protected virtual IEnumerator Idle()
     {
         yield return null;
+
+        if (!Anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        {
+            Anim.SetTrigger("Idle");
+        }
 
         if (CanAtkStateFun())
         {
@@ -86,6 +88,11 @@ public class MonsterMelee : MonsterBase
         this.nvAgent.isStopped = false;
         canAtk = false;
 
+        if (!Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+        {
+            Anim.SetTrigger("Attack");
+        }
+
         //yield return Delay500;
         CurrentState = State.Idle;
     }
@@ -97,11 +104,16 @@ public class MonsterMelee : MonsterBase
         this.nvAgent.isStopped = false;
         this.nvAgent.updatePosition = true;
         this.nvAgent.updateRotation = true;
-        //Move
+
+        if (!Anim.GetCurrentAnimatorStateInfo(0).IsName("Moving"))
+        {
+            Anim.SetTrigger("Moving");
+        }
 
         if (CanAtkStateFun() && canAtk)
         {
             CurrentState = State.Attack;
+
         }
         else
         {

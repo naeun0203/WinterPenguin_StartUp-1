@@ -53,4 +53,8 @@ public class MainUI : MonoBehaviour
     {
         optionMenu.SetActive(true);
     }
+    public void PlaySceneChange()
+    {
+        SceneManager.LoadScene("PlayScene");
+    }
 }

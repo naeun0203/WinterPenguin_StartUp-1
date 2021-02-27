@@ -9,8 +9,6 @@ using UnityEngine;
 
 public class SpiterAttack : MonoBehaviour
 {
-    //public float AttackSpeed = 2.0f;
-    public float SpitSpeed = 1.0f;
     public float SpitListSize = 3;
 
     private Transform playerTransform;
