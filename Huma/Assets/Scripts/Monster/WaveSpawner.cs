@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class WaveSpawner : MonoBehaviour {
 
-	public GameManager gamemanager;
 	public enum SpawnState { SPAWNING, WAITING, COUNTING };
 
 	[System.Serializable]
@@ -18,15 +17,21 @@ public class WaveSpawner : MonoBehaviour {
 
 	public Wave[] waves;
 	private int nextWave = 0;
+	/*
 	public int NextWave
 	{
 		get { return nextWave + 1; }
 	}
-
+	*/
 	public Transform[] spawnPoints;
 
 	public float timeBetweenWaves = 5f;
+	[SerializeField]
 	private float waveCountdown;
+	[SerializeField]
+	private float oneminuteCountup = 0f;
+	[SerializeField]
+	private float fatserterm = 0f;
 	public float WaveCountdown
 	{
 		get { return waveCountdown; }
@@ -42,6 +47,7 @@ public class WaveSpawner : MonoBehaviour {
 
 	void Start()
 	{
+		Debug.Log(waves[nextWave].rate);
 		if (spawnPoints.Length == 0)
 		{
 			Debug.LogError("No spawn points referenced.");
@@ -75,6 +81,23 @@ public class WaveSpawner : MonoBehaviour {
 		{
 			waveCountdown -= Time.deltaTime;
 		}
+		
+		if(state == SpawnState.SPAWNING)
+        {
+			oneminuteCountup += Time.deltaTime;
+            if (oneminuteCountup >= fatserterm)
+            {
+				
+				waves[nextWave].rate-= waves[nextWave].rate * (75f / 1000f);
+				oneminuteCountup = 0f;
+			}
+        }
+		/*
+		if (state == SpawnState.SPAWNING)
+		{
+			StartCoroutine(SpawnFaster(waves[nextWave]));
+		}
+		*/
 	}
 
 	void WaveCompleted()
@@ -113,19 +136,29 @@ public class WaveSpawner : MonoBehaviour {
 	{
 		Debug.Log("Spawning Wave: " + _wave.name);
 		state = SpawnState.SPAWNING;
-
+		//StartCoroutine(SpawnFaster(waves[nextWave]));
 		for (int i = 0; i < _wave.count; i++)
 		{
 			SpawnEnemy(_wave.enemy);
-			yield return new WaitForSeconds( 1f/_wave.rate );
+			yield return new WaitForSeconds( _wave.rate );
 		}
-
 		state = SpawnState.WAITING;
 
 		yield break;
 	}
-
-	void SpawnEnemy(Transform _enemy)
+	/*
+    IEnumerator SpawnFaster(Wave _wave)
+    {
+        oneminuteCountup += Time.deltaTime;
+        if (oneminuteCountup >= 2f)
+        {
+            Debug.Log("SpawnFaster!");
+            _wave.rate -= _wave.rate * (75 / 1000);
+        }
+        yield break;
+    }
+	*/
+    void SpawnEnemy(Transform _enemy)
 	{
 		Debug.Log("Spawning Enemy: " + _enemy.name);
 
