@@ -45,6 +45,7 @@ public class MonsterBase : MonoBehaviour
 
     public Tribe CurrentTribe = Tribe.Zombie;
     public State CurrentState = State.Idle;
+    protected bool knockBack = false;
 
     private float hp;
     protected void Start()
@@ -95,7 +96,7 @@ public class MonsterBase : MonoBehaviour
         nvAgent.stoppingDistance = AttackRange;
         yield return null;
     }
-    #region HP
+    #region HP, EXP
     public float HP
     {
         get { return hp; }
@@ -104,31 +105,66 @@ public class MonsterBase : MonoBehaviour
             hp = value;
             if (hp <= 0)
             {
+                player.EXP += EXP;
                 this.nvAgent.isStopped = true;
+                this.nvAgent.speed = 0;
+
+                this.gameObject.GetComponent<CapsuleCollider>().enabled = false;
 
                 Anim.SetTrigger("Death");
-                this.gameObject.SetActive(false);
-                //Invoke("Death", 1);
+                Invoke("Death", 2.0f);
             }
         }
     }
-/*    void Death()
+    void Death()
     {
         rb.gameObject.SetActive(false);
         this.gameObject.SetActive(false);
-    }*/
+    }
 
     public float HpChanged(float damage)
     {
         rb = GetComponent<Rigidbody>();
         HP += damage;
-
-        pushDirection = Vector3.forward * -10;
-        rb.AddForce(pushDirection * 100);
-
-        Anim.SetTrigger("Hit");
-
+       if(HP > 0)
+        {
+            StartCoroutine(KnockBack());
+        }
         return HP;
+    }
+    #endregion
+
+    #region KnockBack
+    protected void FixedUpdate()
+    {
+        pushDirection = (Player.transform.position - transform.position).normalized;
+        if (knockBack)
+        {
+            StartCoroutine(KnockBack());
+            knockBack = false;
+        }
+    }
+
+    protected IEnumerator KnockBack()
+    {
+        CurrentState = State.Idle;
+        this.nvAgent.isStopped = true;
+        this.nvAgent.speed = 0;
+        rb.isKinematic = false;
+
+        if (!Anim.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
+        {
+            Anim.SetTrigger("Hit");
+        }
+        rb.velocity = pushDirection * -20;
+
+        yield return new WaitForSeconds(0.3f);
+        rb.isKinematic = true;
+        yield return new WaitForSeconds(0.1f);
+
+        this.nvAgent.isStopped = false;
+        this.nvAgent.speed = moveSpeed;
+        knockBack = false;
     }
     #endregion
 
