@@ -5,9 +5,8 @@ using UnityEngine.UI;
 
 public class PlayerHpBar : MonoBehaviour
 {
-    
     private Transform cam;
-    [SerializeField]
+
     private DBManager_Player PlayerDB;
     [SerializeField]
     private Player player;
@@ -58,10 +57,10 @@ public class PlayerHpBar : MonoBehaviour
     {
         currentHp = player.HP;
 
-        if (Input.GetKeyDown(KeyCode.P))
+/*        if (Input.GetKeyDown(KeyCode.P))
         {
             player.HpChanged(10);
-        }
+        }*/
         if (maxHp != currentHp)
         {
             hpbarImage.fillAmount = Mathf.Lerp(hpbarImage.fillAmount, currentHp / maxHp, Time.deltaTime * lerpSpeed);
