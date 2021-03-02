@@ -57,7 +57,7 @@ public class Character_SuHyeon : Player
     Coroutine CheckActivityCoroutine;
     Coroutine EncroachCoroutine;
     #endregion
-
+    
     private void Awake()
     {
         PlayerDB = GameObject.Find("DBManager").GetComponent<DBManager_Player>();
