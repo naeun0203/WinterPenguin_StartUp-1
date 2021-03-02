@@ -68,11 +68,8 @@ public class CharacterController : MonoBehaviour
         h = Input.GetAxisRaw("Horizontal");
         v = Input.GetAxisRaw("Vertical");
 
-        if (h != 1 && h != -1)
-        {
-            if ((v != 1 && v != -1) && !isAttacking) Move();
-        }
-
+        if ((h != 0 || v!=0) && !isAttacking) Move();
+        
         Ray temp = new Ray(Vector3.zero, Vector3.zero);
         if (Input.GetKey(KeyCode.Mouse0))
         {
@@ -92,7 +89,7 @@ public class CharacterController : MonoBehaviour
             Debug.DrawRay(temp.origin, temp.direction * 100, Color.red);
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse1)) ;
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             isRolling = true;
             StartCoroutine(MouseRight());
