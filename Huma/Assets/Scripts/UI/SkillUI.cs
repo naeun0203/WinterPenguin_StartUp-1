@@ -23,7 +23,7 @@ public class SkillUI : MonoBehaviour
     [SerializeField]
     private float currentCoolTime;
 
-    public bool canUseSkill = false;
+    bool canUseSkill = false;
     public void Start()
     {
         PlayerDB = GameObject.Find("DBManager").GetComponent<DBManager_Player>();
@@ -52,6 +52,11 @@ public class SkillUI : MonoBehaviour
 
     private void Update()
     {
+        cooldown = PlayerDB.skillCoolTime;
+        Ability();
+    }
+    private void Ability()
+    {
         if (Input.GetKeyDown(KeyCode.Space) && canUseSkill)
         {
             skillImage.fillAmount = 0;
@@ -59,20 +64,21 @@ public class SkillUI : MonoBehaviour
         }
         if (canUseSkill == false)
         {
-            currentCoolTime -= Time.deltaTime;
-            
-            if (currentCoolTime >= 0)
+            //skillImage.fillAmount += 1 * Time.smoothDeltaTime / cooldown;
+
+            if(currentCoolTime > 0)
             {
-                skillImage.fillAmount += 1 * Time.smoothDeltaTime / cooldown;
                 skillText.text = "" + Mathf.CeilToInt(currentCoolTime);
             }
-            if (skillImage.fillAmount == 1)
+            //skillText.text = "" + currentCoolTime.ToString("N1");
+            currentCoolTime -= Time.smoothDeltaTime;
+
+            if(skillImage.fillAmount == 1)
             {
                 skillText.text = "";
                 canUseSkill = true;
                 currentCoolTime = cooldown;
             }
         }
-
     }
 }

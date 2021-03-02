@@ -22,12 +22,9 @@ public class MonsterMelee : MonsterBase
     }
     void Update()
     {
+        Look = new Vector3(Player.transform.position.x, transform.position.y, Player.transform.position.z);
+        transform.LookAt(Look);
         CurrentHP = HP;
-        if (HP > 0)
-        {
-            Look = new Vector3(Player.transform.position.x, transform.position.y, Player.transform.position.z);
-            transform.LookAt(Look);
-        }
     }
 
 

@@ -11,10 +11,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public List<Transform> MonsterList = new List<Transform>();
-    public void TrueButton()
-    {
-
-    }
     void Start()
     {
         

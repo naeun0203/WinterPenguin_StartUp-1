@@ -403,10 +403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3907a1fbd266601409fb613b9ff3133f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerDB: {fileID: 0}
-  player: {fileID: 0}
-  hpbarImage: {fileID: 0}
-  hpBarPivot: {fileID: 0}
-  currentHp: 0
   maxHp: 0
-  lerpSpeed: 2.5
+  DBManager: {fileID: 0}
+  healthbarImage: {fileID: 8109841974007016273}
+  hpbarPivot: {fileID: 8109841974299943984}
