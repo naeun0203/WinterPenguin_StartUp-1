@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3752132696343149602}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MeleeArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 6626239962232015539}
   - component: {fileID: 6626239962232015538}
   - component: {fileID: 1254463239924391908}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Zombie
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -80,7 +80,7 @@ CapsuleCollider:
   m_Radius: 0.4
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0.88, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!54 &6626239962232015540
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -106,7 +106,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 6626239962232015537}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_Speed: 3.5
   m_Acceleration: 40
   avoidancePriority: 50
@@ -237,6 +237,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: zombie
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0fbe5dc7e9ff51e4f803b481cfe3e650,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fbe5dc7e9ff51e4f803b481cfe3e650, type: 3}
