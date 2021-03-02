@@ -12,6 +12,7 @@ using UnityEngine;
 public class CharacterController : MonoBehaviour
 {
     public bool isAttacking = false;
+    public bool isRolling = false;
     private Player PlayerFunc;
 
     #region DirectionVar
@@ -67,8 +68,10 @@ public class CharacterController : MonoBehaviour
         h = Input.GetAxisRaw("Horizontal");
         v = Input.GetAxisRaw("Vertical");
 
-        if (((h == 1 || h == -1) || (v == 1 || v == -1)) && !isAttacking)
-            Move();
+        if (h != 1 && h != -1)
+        {
+            if ((v != 1 && v != -1) && !isAttacking) Move();
+        }
 
         Ray temp = new Ray(Vector3.zero, Vector3.zero);
         if (Input.GetKey(KeyCode.Mouse0))
@@ -88,7 +91,25 @@ public class CharacterController : MonoBehaviour
 
             Debug.DrawRay(temp.origin, temp.direction * 100, Color.red);
         }
+
+        if (Input.GetKeyDown(KeyCode.Mouse1)) ;
+        {
+            isRolling = true;
+            StartCoroutine(MouseRight());
+        }
     }
+
+    public virtual IEnumerator MouseRight()
+    {
+        speed = 3 * speed;
+        var time = 0;
+        // while(time<)
+
+        yield return null;
+        yield break;
+    }
+
+    
 
     private IEnumerator TurnAndStop(Vector3 dir)
     {

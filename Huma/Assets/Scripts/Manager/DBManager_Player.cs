@@ -32,6 +32,7 @@ public class DBManager_Player : MonoBehaviour
     public int NumberOfTargets;
     public int skillCoolTime;
 
+
     #region Exp
     [HideInInspector]
     public List<float> ExpList = new List<float>();

@@ -1,7 +1,7 @@
 ﻿/*
  * 
  * EDITOR : KIM Ji hun 
- * Last Edit : 2021.2.19
+ * Last Edit : 2021.2.27
  * Script Purpose : Setting Character(Player)'s status
  * 
  */
@@ -16,6 +16,7 @@ public class Character_SuHyeon : Player
     private CharacterController characterCont;
     private List<GameObject> monsterList = new List<GameObject>(); // Specify monster which gonna give the damage
 
+    #region Properties
     public bool ActivatingPlayer
     {
         get { return activatingPlayer; }
@@ -36,19 +37,45 @@ public class Character_SuHyeon : Player
         }
     }
 
+    public override float EXP
+    {
+        get { return Exp; }
+        set
+        {
+            Exp = value;
+            if (Exp >= PlayerDB.ExpList[level - 1])
+            {
+                Exp = Exp - PlayerDB.ExpList[level - 1];
+                level++;
+            }
+        }
+    }
+    #endregion
+
     #region Coroutine
     //Coroutine AttackCoroutine; /* [Obsoleted] Use CharacterController -> characterCont.AttackCoroutine */
     Coroutine CheckActivityCoroutine;
     Coroutine EncroachCoroutine;
     #endregion
 
-    private void Start()
+    private void Awake()
     {
         PlayerDB = GameObject.Find("DBManager").GetComponent<DBManager_Player>();
         PlayerDB.LoadingCharacterData(0); // Load character DB
         characterCont = GetComponent<CharacterController>();
         StartCoroutine(DataSet()); // Set character DB
+    }
+
+    private void Start()
+    {
+        Init();
         ActivatingPlayer = true;
+    }
+
+    private void Init()
+    {
+        level = 1;
+        EXP = 0;
     }
 
     private IEnumerator DataSet()
@@ -98,7 +125,6 @@ public class Character_SuHyeon : Player
         }
     }
 
-
     #region Attack Param
     public float radius; // Using for calculating range for skills
     private Vector3 playerDir;
@@ -136,29 +162,34 @@ public class Character_SuHyeon : Player
                         break; // If monsterList contains 5 monsters, Just stop shooting ray
                     }
                 }
-            }   
-            
+            }
+
         }
 
-        for (int i = 0; i < monsterList.Count; i++)
+        foreach (var t in monsterList)
         {
             //Attack to each monster
-            monsterList[i].GetComponent<MonsterMelee>().HpChanged(-AtkDamage);
+            t.GetComponent<MonsterMelee>().HpChanged(-DamageCalc());
         }
         monsterList.Clear();
 
         yield return new WaitForSeconds(AtkSpeed);
         characterCont.AttackCoroutine = null;
         characterCont.isAttacking = false;
-        yield return null;
+        yield break;
     }
 
     private float DamageCalc()
     {
-        float damage = 0;
-        float critical;
+        float Damage = AtkDamage;
+        float per = Random.Range(0.0f, 100.0f);
+        if (per >= 0f && per <=CriticalProb)
+        {
+            Damage = Damage * CriticalDamage;
+            Debug.Log("Critical!!");
+        }
 
-        return damage;
+        return Damage;
     }
 
     /// <summary>
@@ -192,4 +223,6 @@ public class Character_SuHyeon : Player
 
         yield return null;
     }
+    
+    
 }
