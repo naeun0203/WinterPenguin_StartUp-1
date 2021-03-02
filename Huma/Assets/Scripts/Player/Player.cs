@@ -1,7 +1,7 @@
 ﻿/*
  * 
  * EDITOR : KIM Ji hun 
- * Last Edit : 2021.2.27
+ * Last Edit : 2021.03.01
  * Script Purpose : All characeter's parent Script
  * 
  */
