@@ -96,9 +96,7 @@ public class MonsterBase : MonoBehaviour
         nvAgent.stoppingDistance = AttackRange;
         yield return null;
     }
-    /// <summary>
-    /// 
-    /// </summary>
+    
     #region HP, EXP
     public float HP
     {
