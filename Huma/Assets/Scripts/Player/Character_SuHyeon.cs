@@ -125,7 +125,6 @@ public class Character_SuHyeon : Player
         }
     }
 
-
     #region Attack Param
     public float radius; // Using for calculating range for skills
     private Vector3 playerDir;
@@ -167,17 +166,17 @@ public class Character_SuHyeon : Player
 
         }
 
-        for (int i = 0; i < monsterList.Count; i++)
+        foreach (var t in monsterList)
         {
             //Attack to each monster
-            monsterList[i].GetComponent<MonsterMelee>().HpChanged(-DamageCalc());
+            t.GetComponent<MonsterMelee>().HpChanged(-DamageCalc());
         }
         monsterList.Clear();
 
         yield return new WaitForSeconds(AtkSpeed);
         characterCont.AttackCoroutine = null;
         characterCont.isAttacking = false;
-        yield return null;
+        yield break;
     }
 
     private float DamageCalc()
@@ -224,4 +223,6 @@ public class Character_SuHyeon : Player
 
         yield return null;
     }
+    
+    
 }
