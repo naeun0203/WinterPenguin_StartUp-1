@@ -7,11 +7,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI_Manager : MonoBehaviour
 {
     private static UI_Manager instance = null;
+    public GameObject SlotMachinePanel;
     public static UI_Manager Instance
+        
     {
         get
         {
@@ -22,7 +25,10 @@ public class UI_Manager : MonoBehaviour
             return instance;
         }
     }
-
+    public void ShowSlotMachine()
+    {
+        SlotMachinePanel.SetActive(true);
+    }
     private void Awake()
     {
         if(null == instance)
