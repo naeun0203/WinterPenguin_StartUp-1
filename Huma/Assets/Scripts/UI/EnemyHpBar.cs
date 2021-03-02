@@ -11,51 +11,78 @@ using UnityEngine.UI;
 
 public class EnemyHpBar : MonoBehaviour
 {
-    private float maxHp;
     private Transform cam;
 
-    public Image healthbarImage;
+    [SerializeField]
+    private MonsterBase monster;
+    [SerializeField]
+    private DBManager_Monster MonsterDB;
+
+    public Image hpBarImage;
     public Transform hpbarPivot;
-    public float activeTime = 5f;
+    public float activeTime = 3f;
+
+    [SerializeField]
     private float currentHp;
+    public float maxHp;
+    [SerializeField]
     private float timer = 0f;
 
+    public float lerpSpeed = 2.5f;
+
     private Vector3 lookPosition;
+
     public void Start()
     {
+        monster = GetComponentInParent<MonsterBase>();
+        MonsterDB = GameObject.Find("DBManager").GetComponent<DBManager_Monster>();
+
         cam = Camera.main.transform;
 
-        currentHp = maxHp;
-        hpbarPivot.gameObject.SetActive(true);
+        //maxHp = monster.HP;
+        //currentHp = maxHp;
+
+        hpBarImage.fillAmount = 1;
+        hpbarPivot.gameObject.SetActive(false);
+        StartCoroutine(DataSet());
     }
+    private IEnumerator DataSet()
+    {
+        bool DataLoading = true;
+
+        while (DataLoading)
+        {
+            for (int i = 0; i < MonsterDB.monsterDB.Length; i++)
+            {
+                if (MonsterDB.monsterDB[i].name == monster.CurrentTribe.ToString())
+                {
+                    maxHp = MonsterDB.monsterDB[i].hp;
+
+                    DataLoading = false;
+                }
+            }
+            yield return null;
+        }
+        currentHp = maxHp;
+        yield return null;
+    }
+
     private void Update()
     {
         timer += Time.deltaTime;
+        currentHp = monster.HP;
 
         if (maxHp != currentHp)
         {
             timer = 0;
             hpbarPivot.gameObject.SetActive(true);
-            StartCoroutine(ChangeHealth());
-            currentHp = maxHp;
+            hpBarImage.fillAmount = Mathf.Lerp(hpBarImage.fillAmount, currentHp / maxHp, Time.deltaTime * lerpSpeed);
+            //currentHp = maxHp;
         }
         if (timer >= activeTime)
         {
-            hpbarPivot.gameObject.SetActive(false);
+            //hpbarPivot.gameObject.SetActive(false);
         }
-    }
-    private IEnumerator ChangeHealth()
-    {
-        float changeHp = healthbarImage.fillAmount;
-        float elapsed = 0f;
-
-        while (elapsed < 0.5f)
-        {
-            elapsed += Time.deltaTime;
-            healthbarImage.fillAmount = Mathf.Lerp(changeHp, maxHp / maxHp, elapsed / 0.5f);
-            yield return null;
-        }
-        //healthbarImage.fillAmount = health.currentHealth / health.maxHealth;
     }
     private void LateUpdate()
     {

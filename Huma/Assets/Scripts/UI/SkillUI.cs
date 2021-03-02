@@ -52,11 +52,6 @@ public class SkillUI : MonoBehaviour
 
     private void Update()
     {
-        cooldown = PlayerDB.skillCoolTime;
-        Ability();
-    }
-    private void Ability()
-    {
         if (Input.GetKeyDown(KeyCode.Space) && canUseSkill)
         {
             skillImage.fillAmount = 0;
@@ -64,16 +59,14 @@ public class SkillUI : MonoBehaviour
         }
         if (canUseSkill == false)
         {
-            //skillImage.fillAmount += 1 * Time.smoothDeltaTime / cooldown;
+            currentCoolTime -= Time.deltaTime;
 
-            if(currentCoolTime > 0)
+            if (currentCoolTime >= 0)
             {
+                skillImage.fillAmount += 1 * Time.smoothDeltaTime / cooldown;
                 skillText.text = "" + Mathf.CeilToInt(currentCoolTime);
             }
-            //skillText.text = "" + currentCoolTime.ToString("N1");
-            currentCoolTime -= Time.smoothDeltaTime;
-
-            if(skillImage.fillAmount == 1)
+            if (skillImage.fillAmount == 1)
             {
                 skillText.text = "";
                 canUseSkill = true;
