@@ -38,7 +38,6 @@ public class MonsterBase : MonoBehaviour
     protected NavMeshAgent nvAgent;
     protected Animator Anim;
     protected Vector3 pushDirection;
-    protected Vector3 Look;
 
     protected float distance;
 
@@ -96,14 +95,6 @@ public class MonsterBase : MonoBehaviour
         nvAgent.speed = moveSpeed;
         nvAgent.stoppingDistance = AttackRange;
         yield return null;
-    }
-    protected void Update()
-    {
-        if (HP > 0)
-        {
-            Look = new Vector3(Player.transform.position.x, transform.position.y, Player.transform.position.z);
-            transform.LookAt(Look);
-        }
     }
     #region HP, EXP
     public float HP
