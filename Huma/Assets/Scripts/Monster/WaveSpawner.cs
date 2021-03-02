@@ -47,7 +47,6 @@ public class WaveSpawner : MonoBehaviour {
 
 	void Start()
 	{
-		Debug.Log(waves[nextWave].rate);
 		if (spawnPoints.Length == 0)
 		{
 			Debug.LogError("No spawn points referenced.");

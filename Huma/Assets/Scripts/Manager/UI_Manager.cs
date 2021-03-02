@@ -11,6 +11,7 @@ using UnityEngine;
 public class UI_Manager : MonoBehaviour
 {
     private static UI_Manager instance = null;
+    public GameObject SlotMachinePanel;
     public static UI_Manager Instance
     {
         get

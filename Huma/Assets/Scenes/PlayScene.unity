@@ -288,6 +288,7 @@ Transform:
   m_Children:
   - {fileID: 1316717673}
   - {fileID: 2098353201}
+  - {fileID: 1865339687}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -514,17 +515,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a662e0fea67046647a511eb1e88c55ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gamemanager: {fileID: 0}
   waves:
-  - name: Spiter
-    enemy: {fileID: 0}
-    count: 5
-    rate: 2.173913
+  - name: Zombie
+    enemy: {fileID: 2140339795}
+    count: 50
+    rate: 0.45
   spawnPoints:
   - {fileID: 1967374035}
   - {fileID: 1886961826}
   - {fileID: 1904778301}
   timeBetweenWaves: 3
+  waveCountdown: 0
+  oneminuteCountup: 0
+  fatserterm: 10
 --- !u!1001 &284950197
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2184,6 +2187,50 @@ Transform:
   m_Father: {fileID: 917185109}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1865339686
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1865339687}
+  - component: {fileID: 1865339688}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1865339687
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865339686}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 169534658}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1865339688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865339686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 676eed43c58d6ff49ad4615e6feede2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SlotMachinePanel: {fileID: 340633792}
 --- !u!1 &1886961825
 GameObject:
   m_ObjectHideFlags: 0
