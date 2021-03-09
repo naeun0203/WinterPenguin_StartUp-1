@@ -49,7 +49,7 @@ public class MonsterMelee : MonsterBase
     {
         yield return null;
 
-        while (true)
+        while (!dead)
         {
             yield return StartCoroutine(CurrentState.ToString());
         }
