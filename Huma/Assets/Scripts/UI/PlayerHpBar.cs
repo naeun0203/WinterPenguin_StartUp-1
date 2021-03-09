@@ -7,7 +7,6 @@ public class PlayerHpBar : MonoBehaviour
 {
     
     private Transform cam;
-    [SerializeField]
     private DBManager_Player PlayerDB;
     [SerializeField]
     private Player player;
@@ -28,13 +27,10 @@ public class PlayerHpBar : MonoBehaviour
     {
         PlayerDB = GameObject.Find("DBManager").GetComponent<DBManager_Player>();
         cam = Camera.main.transform;
-
-        //maxHp = player.HP;
-        //currentHp = maxHp;
-
-        hpbarImage.fillAmount = 1;
+        
         hpBarPivot.gameObject.SetActive(true);
         StartCoroutine(DataSet());
+        hpbarImage.fillAmount = 1.0f;
     }
 
     private IEnumerator DataSet()
@@ -57,15 +53,17 @@ public class PlayerHpBar : MonoBehaviour
     private void Update()
     {
         currentHp = player.HP;
-
-        if (Input.GetKeyDown(KeyCode.P))
+        
+/*        if (Input.GetKeyDown(KeyCode.P))
         {
             player.HpChanged(10);
-        }
+        }*/
+
         if (maxHp != currentHp)
         {
-            hpbarImage.fillAmount = Mathf.Lerp(hpbarImage.fillAmount, currentHp / maxHp, Time.deltaTime * lerpSpeed);
+            hpbarImage.fillAmount = Mathf.Lerp(hpbarImage.fillAmount, currentHp / maxHp, Time.smoothDeltaTime * lerpSpeed);
         }
+
     }
     private void LateUpdate()
     {

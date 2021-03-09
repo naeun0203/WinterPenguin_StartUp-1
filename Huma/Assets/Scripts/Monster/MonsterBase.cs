@@ -34,6 +34,7 @@ public class MonsterBase : MonoBehaviour
     public bool isAttack = false;
     protected bool dead = false; 
 
+    protected Gamemanager gamemanager; 
     protected GameObject Player;
     protected Player player;
     protected NavMeshAgent nvAgent;
@@ -51,6 +52,7 @@ public class MonsterBase : MonoBehaviour
     private float hp;
     protected void Start()
     {
+        gamemanager = GameObject.Find("GameManager").GetComponent<Gamemanager>(); 
         MonsterData = GameObject.Find("DBManager").GetComponent<DBManager_Monster>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -113,6 +115,7 @@ public class MonsterBase : MonoBehaviour
                 this.nvAgent.speed = 0;
 
                 this.gameObject.GetComponent<CapsuleCollider>().enabled = false;
+                gamemanager.CurrentMonster -= 1;
 
                 Anim.SetTrigger("Death");
                 Invoke("Death", 2.0f);

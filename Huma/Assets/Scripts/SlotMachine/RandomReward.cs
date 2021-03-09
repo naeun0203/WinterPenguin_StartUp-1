@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿//***************************************
+// EDITOR : CHA Hee Gyoung
+// LAST EDITED DATE : 2021.3.09
+// Script Purpose : RandomReawrd
+//***************************************
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,7 +11,7 @@ using UnityEngine.UI;
 public class RandomReward : MonoBehaviour
 {
     [SerializeField]
-    private UI_Manager UImanagement;
+    private UIManager UImanagement;
     public GameObject ApplyButton;
     [SerializeField]
     private DBManager_Player PlayerDB;
@@ -14,7 +19,7 @@ public class RandomReward : MonoBehaviour
     private Character_SuHyeon SuHyeon_get;
     void Start()
     {
-        UImanagement = GameObject.Find("UIManager").GetComponent<UI_Manager>();
+        UImanagement = GameObject.Find("UIManager").GetComponent<UIManager>();
         PlayerDB = GameObject.Find("DBManager").GetComponent<DBManager_Player>();
         SuHyeon_get = GameObject.Find("Kim").GetComponent<Character_SuHyeon>();
     }
