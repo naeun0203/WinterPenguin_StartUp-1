@@ -5,6 +5,7 @@
  * Script Purpose : Setting Character(Player)'s status
  * 
  */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,7 @@ public class Character_SuHyeon : Player
     private List<GameObject> monsterList = new List<GameObject>(); // Specify monster which gonna give the damage
 
     #region Properties
+
     public bool ActivatingPlayer
     {
         get { return activatingPlayer; }
@@ -50,12 +52,15 @@ public class Character_SuHyeon : Player
             }
         }
     }
+
     #endregion
 
     #region Coroutine
+
     //Coroutine AttackCoroutine; /* [Obsoleted] Use CharacterController -> characterCont.AttackCoroutine */
     Coroutine CheckActivityCoroutine;
     Coroutine EncroachCoroutine;
+
     #endregion
 
     private void Awake()
@@ -101,6 +106,7 @@ public class Character_SuHyeon : Player
 
                 DataLoading = false;
             }
+
             yield return null;
         }
 
@@ -112,7 +118,6 @@ public class Character_SuHyeon : Player
     {
         while (ActivatingPlayer)
         {
-
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 if (EncroachCoroutine == null)
@@ -126,11 +131,13 @@ public class Character_SuHyeon : Player
     }
 
     #region Attack Param
+
     public float radius; // Using for calculating range for skills
     private Vector3 playerDir;
     private float currentAngle; // Using for rotating Ray direction
     public float rotAngle;
     public float segments = 60; // How many rays will you shoot while sweeping one time
+
     #endregion
 
     /// <summary>
@@ -145,32 +152,39 @@ public class Character_SuHyeon : Player
         playerDir = Player.transform.forward;
         for (float i = currentAngle; i >= -22.5f; i -= rotAngle)
         {
-            Quaternion rayDir = Quaternion.AngleAxis(i, Vector3.up); // Rotate Ray Dir to Calc attack range -22.5f ~ 22.5f (Total 45 degree)
+            Quaternion
+                rayDir = Quaternion.AngleAxis(i,
+                    Vector3.up); // Rotate Ray Dir to Calc attack range -22.5f ~ 22.5f (Total 45 degree)
             Vector3 endPos = rayDir * playerDir * radius;
-            Debug.DrawRay(Player.transform.position, endPos, Color.yellow, 1f);
-            RaycastHit hit;
-            if (Physics.Raycast(Player.transform.position, endPos, out hit, radius))
+
+            RaycastHit[] hits;
+            var origin = new Vector3(Player.transform.position.x, Player.transform.position.y + 0.4f,
+                Player.transform.position.z);
+#if UNITY_EDITOR
+            Debug.DrawRay(origin, endPos, Color.yellow, 1f);    
+#endif
+
+            hits = Physics.RaycastAll(origin, endPos, radius);
+
+            for (int j = 0; j < hits.Length; j++)
             {
-                if (hit.transform.CompareTag("Monster")) // If ray hit the monster
+                RaycastHit hit = hits[j];
+                if (hit.transform.CompareTag("Monster") )
                 {
-                    if (monsterList.Count < AtkCount && !monsterList.Contains(hit.transform.gameObject))
+                    if(monsterList.Count<5 && !monsterList.Contains(hit.transform.gameObject))
                     {
-                        monsterList.Add(hit.transform.gameObject); // Add monster GameObject in the list
-                    }
-                    else
-                    {
-                        break; // If monsterList contains 5 monsters, Just stop shooting ray
+                        monsterList.Add(hit.transform.gameObject);    
                     }
                 }
             }
-
         }
 
         foreach (var t in monsterList)
         {
             //Attack to each monster
-            t.GetComponent<MonsterMelee>().HpChanged(-DamageCalc());
+            t.GetComponent<MonsterBase>().HpChanged(-DamageCalc());
         }
+
         monsterList.Clear();
 
         yield return new WaitForSeconds(AtkSpeed);
@@ -183,7 +197,7 @@ public class Character_SuHyeon : Player
     {
         float Damage = AtkDamage;
         float per = Random.Range(0.0f, 100.0f);
-        if (per >= 0f && per <=CriticalProb)
+        if (per >= 0f && per <= CriticalProb)
         {
             Damage = Damage * CriticalDamage;
             Debug.Log("Critical!!");
@@ -219,10 +233,9 @@ public class Character_SuHyeon : Player
             timer += Time.deltaTime;
             yield return null;
         }
+
         EncroachCoroutine = null;
 
         yield return null;
     }
-    
-    
 }

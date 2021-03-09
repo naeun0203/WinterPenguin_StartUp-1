@@ -12,7 +12,7 @@ using UnityEngine.AI;
 public class MonsterBase : MonoBehaviour
 {
     public enum Tribe { Zombie, DevilDog, Spiter, Tanker };
-    public enum State { Idle, Move, Attack };
+    public enum State { Idle, Move, Attack, Dead };
 
     [SerializeField] private DBManager_Monster MonsterData;
     [SerializeField] private GameObject Monster;
@@ -32,6 +32,7 @@ public class MonsterBase : MonoBehaviour
     protected float AttackCoolTimeCacl = 2f;
     protected bool canAtk = true;
     public bool isAttack = false;
+    protected bool dead = false; 
 
     protected Gamemanager gamemanager; 
     protected GameObject Player;
@@ -107,6 +108,8 @@ public class MonsterBase : MonoBehaviour
             hp = value;
             if (hp <= 0)
             {
+                dead = true;
+                CurrentState = State.Dead;
                 player.EXP += EXP;
                 this.nvAgent.isStopped = true;
                 this.nvAgent.speed = 0;
@@ -131,6 +134,7 @@ public class MonsterBase : MonoBehaviour
         HP += damage;
        if(HP > 0)
         {
+            knockBack = true;
             StartCoroutine(KnockBack());
         }
         return HP;
@@ -141,10 +145,9 @@ public class MonsterBase : MonoBehaviour
     protected void FixedUpdate()
     {
         pushDirection = (Player.transform.position - transform.position).normalized;
-        if (knockBack)
+        if(!knockBack)
         {
-            StartCoroutine(KnockBack());
-            knockBack = false;
+            FreezeVelocity();
         }
     }
 
@@ -153,7 +156,6 @@ public class MonsterBase : MonoBehaviour
         CurrentState = State.Idle;
         this.nvAgent.isStopped = true;
         this.nvAgent.speed = 0;
-        rb.isKinematic = false;
 
         if (!Anim.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
         {
@@ -163,13 +165,20 @@ public class MonsterBase : MonoBehaviour
 
         yield return new WaitForSeconds(0.3f);
         rb.isKinematic = true;
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
+        rb.isKinematic = false;
 
         this.nvAgent.isStopped = false;
         this.nvAgent.speed = moveSpeed;
         knockBack = false;
     }
     #endregion
+
+    void FreezeVelocity()
+    {
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+    }
 
     protected bool CanAtkStateFun()
     {
@@ -201,7 +210,7 @@ public class MonsterBase : MonoBehaviour
             if (!canAtk)
             {
                 AttackCoolTimeCacl -= Time.deltaTime;
-                if (AttackCoolTimeCacl <= 0)
+                if (AttackCoolTimeCacl <= 0 && !knockBack && !dead)
                 {
                     AttackCoolTimeCacl = AttackSpeed;
                     canAtk = true;
@@ -212,7 +221,7 @@ public class MonsterBase : MonoBehaviour
 
     IEnumerator CheckStateForActon()
     {
-        while (true)
+        while (!dead)
         {
             switch (CurrentState)
             {
@@ -229,7 +238,7 @@ public class MonsterBase : MonoBehaviour
                     {
                         Damage = 0;
                     }
-                    player.HpChanged(-Damage);
+
                     break;
 
             }
