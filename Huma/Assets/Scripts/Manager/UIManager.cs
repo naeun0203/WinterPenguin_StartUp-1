@@ -16,12 +16,11 @@ public class UIManager : MonoBehaviour
     public GameObject ClearPanel;
     public GameObject SlotMachinePanel;
 
-
     #region Singleton
     private static UIManager _instance;
     public static UIManager Instance
     {
-        get { return _instance;}
+        get { return _instance; }
     }
     private void Awake()
     {
@@ -39,34 +38,34 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        HUD.SetActive(true);
+        HUD.gameObject.SetActive(true);
         SubMenu.SetActive(false);
         //SettingMenu.SetActive(false);
         ClearPanel.SetActive(false);
         SlotMachinePanel.SetActive(false);
     }
 
-/*    private void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (SubMenu.activeSelf && SettingMenu.activeSelf == false)
-            {
-                SubMenu.SetActive(false);
-                Time.timeScale = 1;
-            }
-            else if (SubMenu.activeSelf == false)
+            if (SubMenu.activeSelf == false)
             {
                 SubMenu.SetActive(true);
                 Time.timeScale = 0;
             }
-            else if (SettingMenu.activeSelf)
+            else if (SubMenu.activeSelf /*&& SettingMenu.activeSelf == false*/)
+            {
+                SubMenu.SetActive(false);
+                Time.timeScale = 1;
+            }
+/*            else if (SettingMenu.activeSelf)
             {
                 SettingMenu.SetActive(false);
-            }
+            }*/
         }
     }
-    public void SettingMenuActivation()
+/*    public void SettingMenuActivation()
     {
         SettingMenu.SetActive(true);
     }*/
