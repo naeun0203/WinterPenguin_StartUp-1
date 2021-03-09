@@ -22,8 +22,11 @@ public class MonsterMelee : MonsterBase
     }
     void Update()
     {
-        Look = new Vector3(Player.transform.position.x, transform.position.y, Player.transform.position.z);
-        transform.LookAt(Look);
+        if(HP > 0)
+        {
+            Look = new Vector3(Player.transform.position.x, transform.position.y, Player.transform.position.z);
+            transform.LookAt(Look);
+        }
         CurrentHP = HP;
     }
 
@@ -85,15 +88,14 @@ public class MonsterMelee : MonsterBase
         this.nvAgent.updatePosition = false;
         this.nvAgent.updateRotation = false;
         this.nvAgent.velocity = Vector3.zero;
-        this.nvAgent.isStopped = false;
-        canAtk = false;
 
         if (!Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
         {
             Anim.SetTrigger("Attack");
         }
-
-        //yield return Delay500;
+        player.HpChanged(-Damage);
+        this.nvAgent.isStopped = false;
+        canAtk = false;
         CurrentState = State.Idle;
     }
 

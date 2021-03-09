@@ -10,6 +10,7 @@ using UnityEngine;
 public class SpiterAttack : MonoBehaviour
 {
     public float SpitListSize = 3;
+    public float SpitSpeed = 1.5f;
 
     private Transform playerTransform;
 
@@ -76,7 +77,7 @@ public class SpiterAttack : MonoBehaviour
 
         while (elapse_time < flightDuration)
         {
-            SpitList[i].transform.Translate(0, (Vy - (gravity * elapse_time)) * Time.deltaTime, Vx * Time.deltaTime);
+            SpitList[i].transform.Translate(0, (Vy - (gravity * elapse_time)) * Time.deltaTime, Vx * Time.deltaTime * SpitSpeed);
 
             elapse_time += Time.deltaTime;
 
