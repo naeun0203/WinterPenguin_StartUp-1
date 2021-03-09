@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿//***************************************
+// EDITOR : CHA Hee Gyoung
+// LAST EDITED DATE : 2021.3.09
+// Script Purpose : RandomReawrd
+//***************************************
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
