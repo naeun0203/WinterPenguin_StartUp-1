@@ -47,11 +47,11 @@ abstract public class Player : MonoBehaviour
     public float AtkRange; // 공격 사거리
     public int AtkCount; // 한번에 공격 가능한 수
     public float MoveSpeed; // 이동 속도
-    public int AtkRadius;
+    public float AtkRadius;
     public float CriticalProb;
     public float CriticalDamage;
     public float BloodSucking;
-    public int SkillCoolTime;
+    public float SkillCoolTime;
     public float Exp;
    
 }

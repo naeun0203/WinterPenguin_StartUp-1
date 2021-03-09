@@ -23,14 +23,14 @@ public class DBManager_Player : MonoBehaviour
     public float damage;
     public float hp;
     public float attackSpeed;
-    public int attackRange;
-    public int attackRadius;
+    public float attackRange;
+    public float attackRadius;
     public float criticalProb;
     public float criticalDamage;
     public float bloodSucking;
-    public int moveSpeed;
+    public float moveSpeed;
     public int NumberOfTargets;
-    public int skillCoolTime;
+    public float skillCoolTime;
 
 
     #region Exp
@@ -96,14 +96,14 @@ public class DBManager_Player : MonoBehaviour
         hp = Convert.ToSingle(GetDataValue(characterArr[_index], "HP:"));
         damage = Convert.ToSingle(GetDataValue(characterArr[_index], "Damage:"));
         attackSpeed = Convert.ToSingle(GetDataValue(characterArr[_index], "AttackSpeed:"));
-        attackRange = Convert.ToInt32(GetDataValue(characterArr[_index], "AttackRange:"));
-        attackRadius = Convert.ToInt32(GetDataValue(characterArr[_index], "AttackRadius:"));
+        attackRange = Convert.ToSingle(GetDataValue(characterArr[_index], "AttackRange:"));
+        attackRadius = Convert.ToSingle(GetDataValue(characterArr[_index], "AttackRadius:"));
         criticalProb = Convert.ToSingle(GetDataValue(characterArr[_index], "CriticalProbability:"));
         criticalDamage = Convert.ToSingle(GetDataValue(characterArr[_index], "CriticalDamage:"));
         bloodSucking = Convert.ToSingle(GetDataValue(characterArr[_index], "BloodSucking:"));
-        moveSpeed = Convert.ToInt32(GetDataValue(characterArr[_index], "MoveSpeed:"));
+        moveSpeed = Convert.ToSingle(GetDataValue(characterArr[_index], "MoveSpeed:"));
         NumberOfTargets = Convert.ToInt32(GetDataValue(characterArr[_index], "NumberOfTargets:"));
-        skillCoolTime = Convert.ToInt32(GetDataValue(characterArr[_index], "SkillCoolTime:"));
+        skillCoolTime = Convert.ToSingle(GetDataValue(characterArr[_index], "SkillCoolTime:"));
         isLoaded = true;
     }
 
