@@ -8,14 +8,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+//using System.Diagnostics;
 
 public class EnemyHpBar : MonoBehaviour
 {
     private Transform cam;
 
-    [SerializeField]
     private MonsterBase monster;
-    [SerializeField]
     private DBManager_Monster MonsterDB;
 
     public Image hpBarImage;
@@ -24,14 +23,16 @@ public class EnemyHpBar : MonoBehaviour
 
     [SerializeField]
     private float currentHp;
-    public float maxHp;
-    [SerializeField]
-    private float timer = 0f;
+    private float maxHp;
+    private float ex_Hp;
 
+    [SerializeField]
+    private float timer;
     public float lerpSpeed = 2.5f;
 
     private Vector3 lookPosition;
 
+    public bool timerStart;
     public void Start()
     {
         monster = GetComponentInParent<MonsterBase>();
@@ -39,13 +40,12 @@ public class EnemyHpBar : MonoBehaviour
 
         cam = Camera.main.transform;
 
-        //maxHp = monster.HP;
-        //currentHp = maxHp;
-
+        timerStart = false;
         hpBarImage.fillAmount = 1;
-        hpbarPivot.gameObject.SetActive(false);
+        //hpbarPivot.gameObject.SetActive(false);
         StartCoroutine(DataSet());
     }
+    #region DataSet
     private IEnumerator DataSet()
     {
         bool DataLoading = true;
@@ -64,25 +64,35 @@ public class EnemyHpBar : MonoBehaviour
             yield return null;
         }
         currentHp = maxHp;
+        ex_Hp = currentHp;
         yield return null;
     }
-
+    #endregion
     private void Update()
     {
-        timer += Time.deltaTime;
         currentHp = monster.HP;
-
-        if (maxHp != currentHp)
+        if (currentHp != ex_Hp)
         {
-            timer = 0;
+            ex_Hp = currentHp;
+            resetTime();
+            timerStart = true;
+        }
+        if (timerStart)
+        {
+            timer += Time.deltaTime;
             hpbarPivot.gameObject.SetActive(true);
             hpBarImage.fillAmount = Mathf.Lerp(hpBarImage.fillAmount, currentHp / maxHp, Time.deltaTime * lerpSpeed);
-            //currentHp = maxHp;
+            if (timer > activeTime)
+            {
+                resetTime();
+                //hpbarPivot.gameObject.SetActive(false);
+            }
         }
-        if (timer >= activeTime)
-        {
-            //hpbarPivot.gameObject.SetActive(false);
-        }
+    }
+    public void resetTime()
+    {
+        timerStart = false;
+        timer = 0;
     }
     private void LateUpdate()
     {

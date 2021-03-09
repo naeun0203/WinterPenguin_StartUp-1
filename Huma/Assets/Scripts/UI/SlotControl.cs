@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SlotControl : MonoBehaviour
 {
-    public int RandomReward = 0;
+    public RandomReward randomReward;
     public GameObject Slot;
     public GameObject SlotObject;
     private Transform SlotObj;
@@ -18,7 +18,6 @@ public class SlotControl : MonoBehaviour
     private void Start()
     {
         SlotObj = SlotObject.transform;
-        Slot.SetActive(false);
         rowStopped = true;
     }
     public void StartRotating()
@@ -35,14 +34,14 @@ public class SlotControl : MonoBehaviour
         {
 
             if (SlotObj.localPosition.y <= 0f)
-                SlotObj.localPosition = new Vector3(0, 1500f, 0);
+                SlotObj.localPosition = new Vector3(0, 1050f, 0);
 
             SlotObj.localPosition -= new Vector3(0, 50f, 0);
 
             yield return new WaitForSeconds(timeInterval);
         }
 
-        /*        StopValue = Random.Range(70, 100);
+        /*        StopValue = Random.Range(60, 100);
                 switch (StopValue % 3)
                 {
                     case 1:
@@ -52,44 +51,44 @@ public class SlotControl : MonoBehaviour
                         StopValue += 1;
                         break;
                 }*/
-        switch (RandomReward)
+        switch (randomReward.ResultCase)
         {
             case 1:
-                StopValue = 60;
-                break;
-            case 2:
-                StopValue = 63;
-                break;
-            case 3:
                 StopValue = 66;
                 break;
-            case 4:
+            case 2:
                 StopValue = 69;
                 break;
-            case 5:
+            case 3:
                 StopValue = 72;
                 break;
-            case 6:
+            case 4:
                 StopValue = 75;
                 break;
-            case 7:
+            case 5:
                 StopValue = 78;
                 break;
-            case 8:
+            case 6:
                 StopValue = 81;
+                break;
+            case 7:
+                StopValue = 84;
+                break;
+/*            case 8:
+                StopValue = 87;
                 break;
             case 9:
                 StopValue = 84;
                 break;
             case 10:
                 StopValue = 87;
-                break;
+                break;*/
         }
 
         for (int i = 0; i < StopValue; i++)
         {
             if(SlotObj.localPosition.y <= 0f)
-                SlotObj.localPosition = new Vector3(0, 1500f, 0);
+                SlotObj.localPosition = new Vector3(0, 1050f, 0);
 
             SlotObj.localPosition -= new Vector3(0, 50f, 0);
 
