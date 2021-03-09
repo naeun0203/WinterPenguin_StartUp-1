@@ -989,7 +989,6 @@ GameObject:
   m_Component:
   - component: {fileID: 250142990866217756}
   - component: {fileID: 1133100323291075395}
-  - component: {fileID: 4093679666403417666}
   m_Layer: 0
   m_Name: HUD
   m_TagString: Untagged
@@ -1024,26 +1023,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2265ec0b0904744db78765e4453af13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 4006911343144991842, guid: f27857e422b9c25418a5196d6a0a9ddd, type: 3}
   expImage: {fileID: 4800686388438174403}
   levelText: {fileID: 5616667029325441103}
   currentExp: 0
   maxExp: 0
   lerpSpeed: 0.5
---- !u!114 &4093679666403417666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7144560565516170139}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 391a9aa53ff4f11418b0983504397148, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Spawner: {fileID: 0}
-  MonsterText: {fileID: 695410813824266793}
 --- !u!1 &7957187450223949212
 GameObject:
   m_ObjectHideFlags: 0

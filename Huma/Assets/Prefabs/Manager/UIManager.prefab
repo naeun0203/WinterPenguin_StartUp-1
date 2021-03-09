@@ -43,8 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 676eed43c58d6ff49ad4615e6feede2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HUD: {fileID: 0}
-  SubMenu: {fileID: 0}
+  HUD: {fileID: 7144560565516170139, guid: 7b2534435e465334f8ff46df4b75847e, type: 3}
+  SubMenu: {fileID: 8671617865273550102, guid: 3415cdfcd20cf7741894b5b64cf78b84, type: 3}
   SettingMenu: {fileID: 0}
-  ClearPanel: {fileID: 0}
-  SlotMachinePanel: {fileID: 0}
+  ClearPanel: {fileID: 129747489406702091, guid: cf9489ada5511d34984c0b2d4f6dac99,
+    type: 3}
+  SlotMachinePanel: {fileID: 7496450098570355779, guid: 0c7fd80c5383516449465536e56af7ba,
+    type: 3}

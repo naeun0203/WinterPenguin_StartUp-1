@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
 {
     public GameObject HUD;
     public GameObject SubMenu;
-    public GameObject SettingMenu;
+    //public GameObject SettingMenu;
     public GameObject ClearPanel;
     public GameObject SlotMachinePanel;
 
@@ -41,12 +41,12 @@ public class UIManager : MonoBehaviour
     {
         HUD.SetActive(true);
         SubMenu.SetActive(false);
-        SettingMenu.SetActive(false);
+        //SettingMenu.SetActive(false);
         ClearPanel.SetActive(false);
         SlotMachinePanel.SetActive(false);
     }
 
-    private void Update()
+/*    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -69,7 +69,7 @@ public class UIManager : MonoBehaviour
     public void SettingMenuActivation()
     {
         SettingMenu.SetActive(true);
-    }
+    }*/
     public void ContinueActivation()
     {
         SubMenu.SetActive(false);
