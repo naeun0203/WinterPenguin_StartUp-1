@@ -30,6 +30,7 @@ public class SlotControl : MonoBehaviour
     {
         rowStopped = false;
         timeInterval = 0.025f;
+
         for(int i = 0; i < (10*2)*3; i++)
         {
 
@@ -38,7 +39,7 @@ public class SlotControl : MonoBehaviour
 
             SlotObj.localPosition -= new Vector3(0, 50f, 0);
 
-            yield return new WaitForSeconds(timeInterval);
+            yield return new WaitForSecondsRealtime(timeInterval);
         }
 
         /*        StopValue = Random.Range(60, 100);
@@ -74,15 +75,6 @@ public class SlotControl : MonoBehaviour
             case 7:
                 StopValue = 84;
                 break;
-/*            case 8:
-                StopValue = 87;
-                break;
-            case 9:
-                StopValue = 84;
-                break;
-            case 10:
-                StopValue = 87;
-                break;*/
         }
 
         for (int i = 0; i < StopValue; i++)
@@ -101,7 +93,7 @@ public class SlotControl : MonoBehaviour
             if (i > Mathf.RoundToInt(StopValue * 2f))
                 timeInterval = 0.2f;
 
-            yield return new WaitForSeconds(timeInterval);
+            yield return new WaitForSecondsRealtime(timeInterval);
         }
 
         rowStopped = true;

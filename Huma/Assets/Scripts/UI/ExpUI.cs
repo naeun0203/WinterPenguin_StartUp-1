@@ -50,7 +50,7 @@ public class ExpUI : MonoBehaviour
         currentExp = player.EXP;
 
         expImage.fillAmount = Mathf.Lerp(expImage.fillAmount, currentExp / maxExp, Time.deltaTime * lerpSpeed);
-
+        
         levelText.text = string.Format("Level {0}", player.level);
     }
 }
