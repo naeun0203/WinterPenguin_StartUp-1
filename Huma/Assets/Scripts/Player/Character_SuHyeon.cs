@@ -50,7 +50,6 @@ public class Character_SuHyeon : Player
             {
                 Exp = Exp - PlayerDB.ExpList[level - 1];
                 level++;
-                UI.ShowSlotMachinePanel();
             }
         }
     }
