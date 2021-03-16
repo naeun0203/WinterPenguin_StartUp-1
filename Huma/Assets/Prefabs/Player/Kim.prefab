@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2907287937100811273}
-  - component: {fileID: 2907287937100811278}
-  - component: {fileID: 4006911343144991842}
+  - component: {fileID: 7446729650023203565}
+  - component: {fileID: 2110378481350797975}
   - component: {fileID: 5216131495111924425}
   - component: {fileID: 6050704019763862348}
   - component: {fileID: 6178214626490591359}
@@ -38,7 +38,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2907287937100811278
+--- !u!114 &7446729650023203565
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -52,10 +52,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAttacking: 0
   isRolling: 0
-  speed: 10
+  speed: 6
   Player: {fileID: 9002237189941990831}
   rotSpeed: 0.1
---- !u!114 &4006911343144991842
+--- !u!114 &2110378481350797975
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,7 +85,7 @@ MonoBehaviour:
   Exp: 0
   PlayerDB: {fileID: 0}
   Player: {fileID: 9002237189941990831}
-  UI: {fileID: 1836295831429969202, guid: eadc0f11135420c499e4ae1c4d01bbba, type: 3}
+  UI: {fileID: 0}
   radius: 0
   rotAngle: 0
   segments: 60
@@ -310,7 +310,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 4006911343144991842}
+      objectReference: {fileID: 0}
     - target: {fileID: 8719794847007103207, guid: fe62ee57297d0b143a4951384b68b384,
         type: 3}
       propertyPath: hpBarPivot

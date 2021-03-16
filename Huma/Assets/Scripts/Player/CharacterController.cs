@@ -126,7 +126,7 @@ public class CharacterController : MonoBehaviour
     float rollingSpeed = 2f;
     #endregion
 
-    public virtual IEnumerator MouseRight()
+    public IEnumerator MouseRight()
     {
         speed =  speed*rollingSpeed; // increase speed as Multiply
         float time = 0;
