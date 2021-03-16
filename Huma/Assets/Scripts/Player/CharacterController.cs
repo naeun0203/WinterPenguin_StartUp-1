@@ -8,7 +8,9 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
+using Vector3 = UnityEngine.Vector3;
 
 public class CharacterController : MonoBehaviour
 {
@@ -50,8 +52,12 @@ public class CharacterController : MonoBehaviour
 
     private void Move()
     {
-        transform.Translate(new Vector3(h * speed * Time.deltaTime, 0, v * speed * Time.deltaTime));
         Vector3 dir = new Vector3(h, 0, v);
+        if (dir.magnitude > 1)
+        {
+            dir = dir.normalized;
+        }
+        transform.Translate(dir * (speed * Time.deltaTime));
         if (MoveByKeyCoroutine == null)
             MoveByKeyCoroutine = StartCoroutine(MoveByKey(dir));
     }
@@ -116,17 +122,18 @@ public class CharacterController : MonoBehaviour
     }
 
     #region RollingParam
-    float rollingTime = 0.5f;
-    float rollingSpeed = 3f;
+    float rollingTime = .5f;
+    float rollingSpeed = 2f;
     #endregion
 
     public virtual IEnumerator MouseRight()
     {
-        speed = rollingSpeed* speed;
+        speed =  speed*rollingSpeed; // increase speed as Multiply
         float time = 0;
-        while (time <= rollingTime)
+        Vector3 des = transform.position + (Player.transform.forward.normalized * (speed * rollingTime)); // Calc destination with speed and time for roll forward
+        while (time<rollingTime)
         {
-            transform.position = Vector3.Lerp(transform.position, transform.position + Player.transform.forward*speed, time / speed);
+            transform.position = Vector3.Lerp(transform.position, des, time/rollingTime); // Lerp Character each frames
             time += Time.deltaTime;
             yield return null;
         }

@@ -15,6 +15,7 @@ public class Character_SuHyeon : Player
     [SerializeField] private DBManager_Player PlayerDB;
     [SerializeField] private GameObject Player;
     private CharacterController characterCont;
+    public UIManager UI;
     private List<GameObject> monsterList = new List<GameObject>(); // Specify monster which gonna give the damage
 
     #region Properties
@@ -49,6 +50,7 @@ public class Character_SuHyeon : Player
             {
                 Exp = Exp - PlayerDB.ExpList[level - 1];
                 level++;
+                UI.ShowSlotMachinePanel();
             }
         }
     }
