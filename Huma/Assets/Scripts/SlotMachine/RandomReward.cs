@@ -14,13 +14,10 @@ public class RandomReward : MonoBehaviour
     private UIManager UImanagement;
     public GameObject ApplyButton;
     [SerializeField]
-    private DBManager_Player PlayerDB;
-    [SerializeField]
     private Character_SuHyeon SuHyeon_get;
     void Start()
     {
         UImanagement = GameObject.Find("UIManager").GetComponent<UIManager>();
-        PlayerDB = GameObject.Find("DBManager").GetComponent<DBManager_Player>();
         SuHyeon_get = GameObject.Find("Kim").GetComponent<Character_SuHyeon>();
     }
     
@@ -30,7 +27,6 @@ public class RandomReward : MonoBehaviour
     /// </summary>
     public void StartButton()
     {
-        
         int number = Random.Range(0, 10000);
         if (number>=0&& number < 300)
         {
@@ -120,4 +116,5 @@ public class RandomReward : MonoBehaviour
     {
         ApplyButton.SetActive(true);
     }
+    
 }

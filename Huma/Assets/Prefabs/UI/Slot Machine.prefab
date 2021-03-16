@@ -2312,7 +2312,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8567262304717174675
 Transform:
   m_ObjectHideFlags: 0
@@ -2360,7 +2360,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UImanagement: {fileID: 0}
   ApplyButton: {fileID: 3171964836616048234}
-  PlayerDB: {fileID: 0}
   SuHyeon_get: {fileID: 0}
   ResultCase: 5
 --- !u!1 &7632002168323524639
