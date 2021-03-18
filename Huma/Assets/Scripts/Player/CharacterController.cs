@@ -67,8 +67,13 @@ public class CharacterController : MonoBehaviour
         float elapsedTime = 0;
         while (elapsedTime < rotSpeed)
         {
-            Player.transform.forward = Vector3.Lerp(Player.transform.forward, dir, elapsedTime / rotSpeed);
-            elapsedTime += Time.deltaTime;
+            if (!isRolling)
+            {
+                Player.transform.forward = Vector3.Lerp(Player.transform.forward, dir, elapsedTime / rotSpeed);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
             yield return null;
         }
 
@@ -101,7 +106,6 @@ public class CharacterController : MonoBehaviour
                 if (TurnAndStopCoroutine == null)
                     TurnAndStopCoroutine = StartCoroutine(TurnAndStop(targetPos));
                 
-                
 #if UNITY_EDITOR
                 Debug.DrawRay(temp.origin, temp.direction * 100, Color.red);
 #endif
@@ -116,23 +120,34 @@ public class CharacterController : MonoBehaviour
                 }
             }
         }
-        
-
-        
     }
 
     #region RollingParam
     float rollingTime = .5f;
     float rollingSpeed = 2f;
+    private float ROLLING_COOL = 5f;
     #endregion
 
     public IEnumerator MouseRight()
     {
         speed =  speed*rollingSpeed; // increase speed as Multiply
         float time = 0;
-        Vector3 des = transform.position + (Player.transform.forward.normalized * (speed * rollingTime)); // Calc destination with speed and time for roll forward
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 10000f))
+        {
+            targetPos = hit.point;
+        }
+
+        Vector3 dir = (targetPos - transform.position).normalized;
+        Vector3 des = transform.position + (dir * (speed * rollingTime)); // Calc destination with speed and time for roll forward
+
+        
+        Debug.Log(Player.transform.forward);
         while (time<rollingTime)
         {
+            Player.transform.forward = dir;
             transform.position = Vector3.Lerp(transform.position, des, time/rollingTime); // Lerp Character each frames
             time += Time.deltaTime;
             yield return null;
@@ -140,6 +155,7 @@ public class CharacterController : MonoBehaviour
 
         speed = speed / rollingSpeed;
         isRolling = false;
+        yield return new WaitForSeconds(ROLLING_COOL);
         MouseRightCoroutine = null;
         yield break;
     }

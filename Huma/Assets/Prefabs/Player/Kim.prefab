@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 5216131495111924425}
   - component: {fileID: 6050704019763862348}
   - component: {fileID: 6178214626490591359}
-  - component: {fileID: 6042744122124121957}
   m_Layer: 0
   m_Name: Kim
   m_TagString: Player
@@ -115,7 +114,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_Height: 2.2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
@@ -215,25 +214,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!95 &6042744122124121957
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2907287937100811279}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1634803498206936251
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -414,6 +394,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: kimsoohyun
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: c57f7e422cb19004e9abda6d946d4878,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 7130c06535553804c871933e3836f09e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c57f7e422cb19004e9abda6d946d4878, type: 3}
 --- !u!1 &9002237189941990831 stripped
