@@ -408,4 +408,4 @@ MonoBehaviour:
   hpBarPivot: {fileID: 8109841974299943984}
   currentHp: 0
   maxHp: 0
-  lerpSpeed: 2.5
+  lerpSpeed: 3
