@@ -17,8 +17,8 @@ public class WaveSpawner : MonoBehaviour {
 	{
 		public string name;
 		public Transform enemy;
-		public float rate;
 	}
+
 	public Monster[] monsters;
 
 	[SerializeField] private float waveCountdown;
@@ -42,15 +42,15 @@ public class WaveSpawner : MonoBehaviour {
 	public int spiter = 0;
 	public int tanker = 0;
 
+	public float zombiefast_game;
+	public float devildogfast_game;
+	public float spiterfast_game;
+	public float tankerfast_game;
+
 	private IEnumerator enumerator_0;
 	private IEnumerator enumerator_1;
 	private IEnumerator enumerator_2;
 	private IEnumerator enumerator_3;
-
-	Coroutine coroutine_0;
-	Coroutine coroutine_1;
-	Coroutine coroutine_2;
-	Coroutine coroutine_3;
 
 	void Start()
 	{
@@ -58,6 +58,11 @@ public class WaveSpawner : MonoBehaviour {
 	    devildog = Gamemanager.devildogCount;
 	    spiter = Gamemanager.spiterCount;
 	    tanker = Gamemanager.tankerCount;
+
+		zombiefast_game = Gamemanager.zombiefast;
+		devildogfast_game = Gamemanager.devildogfast;
+		spiterfast_game = Gamemanager.spiterfast;
+		tankerfast_game = Gamemanager.tankerfast;
 
 		enumerator_0 = ZombieSpawnWave(monsters[0]);
 		enumerator_1 = DevilDogSpawnWave(monsters[1]);
@@ -133,7 +138,10 @@ public class WaveSpawner : MonoBehaviour {
 			oneminuteCountup += Time.deltaTime;
             if (oneminuteCountup >= fatserterm)
             {
-				monsters[0].rate-= monsters[0].rate * (75f / 1000f);//일단 좀비만
+				zombiefast_game -= zombiefast_game * (75f / 1000f);//일단 좀비만
+				devildogfast_game -= devildogfast_game * (75f / 1000f);
+				spiterfast_game -= spiterfast_game * (75f / 1000f);
+				tankerfast_game -= tankerfast_game * (75f / 1000f);
 				oneminuteCountup = 0f;
 			}
         }
@@ -148,7 +156,7 @@ public class WaveSpawner : MonoBehaviour {
 				SpawnEnemy(_monster.enemy);
 				gamemanager.CurrentMonster += 1;
 				zombie--;
-				yield return new WaitForSeconds(_monster.rate);
+				yield return new WaitForSeconds(Gamemanager.zombiefast);
 			}
 			else 
 			{
@@ -159,16 +167,16 @@ public class WaveSpawner : MonoBehaviour {
 		state = SpawnState.WAITING; //zombie==0일때로 바뀔수도 있음
 		yield break;
 	}
-	IEnumerator DevilDogSpawnWave(Monster __monster)
+	IEnumerator DevilDogSpawnWave(Monster _monster)
 	{
 		while (devildog > 0)
 		{
 			if (state == SpawnState.SPAWNING)
 			{
-				SpawnEnemy(__monster.enemy);
+				SpawnEnemy(_monster.enemy);
 				gamemanager.CurrentMonster += 1;
 				devildog--;
-				yield return new WaitForSeconds(__monster.rate);
+				yield return new WaitForSeconds(Gamemanager.devildogfast);
 			}
 			else
 			{
@@ -187,7 +195,7 @@ public class WaveSpawner : MonoBehaviour {
 				SpawnEnemy(_monster.enemy);
 				gamemanager.CurrentMonster += 1;
 				spiter--;
-				yield return new WaitForSeconds(_monster.rate);
+				yield return new WaitForSeconds(Gamemanager.spiterfast);
 			}
 			else
 			{
@@ -206,7 +214,7 @@ public class WaveSpawner : MonoBehaviour {
 				SpawnEnemy(_monster.enemy);
 				gamemanager.CurrentMonster += 1;
 				tanker--;
-				yield return new WaitForSeconds(_monster.rate);
+				yield return new WaitForSeconds(Gamemanager.tankerfast);
 			}
 			else
 			{

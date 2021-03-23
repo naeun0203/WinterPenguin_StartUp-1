@@ -27,7 +27,7 @@ public class MonsterBase : MonoBehaviour
     [SerializeField] protected float skillCoolTime;
     [SerializeField] protected float EXP;
 
-
+    [SerializeField] ParticleSystem particle;
 
     protected float AttackCoolTimeCacl = 2f;
     protected bool canAtk = true;
@@ -114,7 +114,7 @@ public class MonsterBase : MonoBehaviour
                 this.nvAgent.isStopped = true;
                 this.nvAgent.speed = 0;
 
-                this.gameObject.GetComponent<CapsuleCollider>().enabled = false;
+                this.gameObject.GetComponent<Collider>().enabled = false;
                 gamemanager.CurrentMonster -= 1;
 
                 Anim.SetTrigger("Death");
@@ -132,7 +132,8 @@ public class MonsterBase : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         HP += damage;
-       if(HP > 0)
+        particle.Play();
+        if (HP > 0)
         {
             knockBack = true;
             StartCoroutine(KnockBack());
@@ -161,11 +162,12 @@ public class MonsterBase : MonoBehaviour
         {
             Anim.SetTrigger("Hit");
         }
-        rb.velocity = pushDirection * -20;
+        rb.velocity = pushDirection * -moveSpeed*2;
+
 
         yield return new WaitForSeconds(0.3f);
-        rb.isKinematic = true;
-        yield return new WaitForSeconds(0.2f);
+       rb.isKinematic = true;
+        yield return new WaitForSeconds(0.25f);
         rb.isKinematic = false;
 
         this.nvAgent.isStopped = false;

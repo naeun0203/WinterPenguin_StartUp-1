@@ -11,7 +11,6 @@ public class Sound
     public MonsterType monsterType;
 
     public AudioClip Attack;
-    public AudioClip Move;
     public AudioClip Hit;
     public AudioClip Dead;
 }
