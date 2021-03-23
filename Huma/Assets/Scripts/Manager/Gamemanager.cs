@@ -7,6 +7,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Gamemanager : MonoBehaviour
 {
@@ -29,10 +30,17 @@ public class Gamemanager : MonoBehaviour
     
     public static int StageNumber = 1;
     public int CurrentMonster;
+
     public static int zombieCount = 0;
     public static int devildogCount = 0;
     public static int spiterCount = 0;
     public static int tankerCount = 0;
+
+    public static float zombiefast = 0;
+    public static float devildogfast = 0;
+    public static float spiterfast = 0;
+    public static float tankerfast = 0;
+
     public List<Transform> MonsterList = new List<Transform>();
     /*
     public static Gamemanager Instance
@@ -50,8 +58,10 @@ public class Gamemanager : MonoBehaviour
     public void Stage1Select()
     {
         StageNumber = 1;
-
+        
         zombieCount = 600;
+
+        zombiefast = 0.64f;
 
     }
     public void Stage2Select()
@@ -60,6 +70,9 @@ public class Gamemanager : MonoBehaviour
 
         zombieCount = 600;
         devildogCount = 150;
+
+        zombiefast = 0.64f;
+        devildogfast = 2.56f;
     }
     public void Stage3Select()
     {
@@ -68,6 +81,10 @@ public class Gamemanager : MonoBehaviour
         zombieCount = 600;
         devildogCount = 200;
         spiterCount = 40;
+
+        zombiefast = 0.64f;
+        devildogfast = 1.92f;
+        spiterfast = 9.6f;
     }
     public void Stage4Select()
     {
@@ -77,6 +94,25 @@ public class Gamemanager : MonoBehaviour
         devildogCount = 200;
         spiterCount = 80;
         tankerCount = 8;
+
+        zombiefast = 0.64f;
+        devildogfast = 1.92f;
+        spiterfast = 4.8f;
+        tankerfast = 48f;
+    }
+
+    public void PlaySceneChange()
+    {
+        SceneManager.LoadScene("PlayScene");
+    }
+
+    public void StageSelectSceneChange()
+    {
+        SceneManager.LoadScene("StageSelect");
+    }
+    public void RetryButton()
+    {
+
     }
     void Start()
     {

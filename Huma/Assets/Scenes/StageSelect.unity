@@ -721,7 +721,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1817273955}
+      objectReference: {fileID: 1047517065}
     - target: {fileID: 466160573670846948, guid: 457386842318e5948830fe6c3a323275,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -832,6 +832,26 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1007394731534149503, guid: 457386842318e5948830fe6c3a323275,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1047517065}
+    - target: {fileID: 1007394731534149503, guid: 457386842318e5948830fe6c3a323275,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlaySceneChange
+      objectReference: {fileID: 0}
+    - target: {fileID: 3215896801588145329, guid: 457386842318e5948830fe6c3a323275,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1047517065}
+    - target: {fileID: 3215896801588145329, guid: 457386842318e5948830fe6c3a323275,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlaySceneChange
+      objectReference: {fileID: 0}
     - target: {fileID: 3359937253025545852, guid: 457386842318e5948830fe6c3a323275,
         type: 3}
       propertyPath: m_Name
@@ -856,7 +876,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1817273955}
+      objectReference: {fileID: 1047517065}
     - target: {fileID: 3371368092518321884, guid: 457386842318e5948830fe6c3a323275,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -894,18 +914,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 457386842318e5948830fe6c3a323275, type: 3}
---- !u!114 &1817273955 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 466160573540753479, guid: 457386842318e5948830fe6c3a323275,
-    type: 3}
-  m_PrefabInstance: {fileID: 1230607389}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e9f276daa44b7f4eaa617db761cd943, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &8215089740840788793
 PrefabInstance:
   m_ObjectHideFlags: 0

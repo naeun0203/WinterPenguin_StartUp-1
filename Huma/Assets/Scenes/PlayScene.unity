@@ -1352,17 +1352,57 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8671617866281882887, guid: 3415cdfcd20cf7741894b5b64cf78b84,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8671617866281882887, guid: 3415cdfcd20cf7741894b5b64cf78b84,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8671617866281882887, guid: 3415cdfcd20cf7741894b5b64cf78b84,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8671617866281882887, guid: 3415cdfcd20cf7741894b5b64cf78b84,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 826817739}
+      objectReference: {fileID: 8688937585163852191}
+    - target: {fileID: 8671617866281882887, guid: 3415cdfcd20cf7741894b5b64cf78b84,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 8688937585163852191}
+    - target: {fileID: 8671617866281882887, guid: 3415cdfcd20cf7741894b5b64cf78b84,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8671617866281882887, guid: 3415cdfcd20cf7741894b5b64cf78b84,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8671617866281882887, guid: 3415cdfcd20cf7741894b5b64cf78b84,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: MenuSceneChange
+      value: StageSelectSceneChange
+      objectReference: {fileID: 0}
+    - target: {fileID: 8671617866281882887, guid: 3415cdfcd20cf7741894b5b64cf78b84,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Stage1Select
       objectReference: {fileID: 0}
     - target: {fileID: 8671617866281882887, guid: 3415cdfcd20cf7741894b5b64cf78b84,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8671617866281882887, guid: 3415cdfcd20cf7741894b5b64cf78b84,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8671617866284125427, guid: 3415cdfcd20cf7741894b5b64cf78b84,
@@ -1915,7 +1955,7 @@ PrefabInstance:
     - target: {fileID: 2907287937100811273, guid: f27857e422b9c25418a5196d6a0a9ddd,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -15.535
       objectReference: {fileID: 0}
     - target: {fileID: 2907287937100811273, guid: f27857e422b9c25418a5196d6a0a9ddd,
         type: 3}
@@ -2959,9 +2999,44 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 615387180509905912, guid: c025b49928315734393f0be9e53bbddd,
         type: 3}
+      propertyPath: spiter
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 615387180509905912, guid: c025b49928315734393f0be9e53bbddd,
+        type: 3}
+      propertyPath: tanker
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 615387180509905912, guid: c025b49928315734393f0be9e53bbddd,
+        type: 3}
+      propertyPath: zombie
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 615387180509905912, guid: c025b49928315734393f0be9e53bbddd,
+        type: 3}
+      propertyPath: devildog
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 615387180509905912, guid: c025b49928315734393f0be9e53bbddd,
+        type: 3}
       propertyPath: gamemanager
       value: 
       objectReference: {fileID: 8688937585163852191}
+    - target: {fileID: 615387180509905912, guid: c025b49928315734393f0be9e53bbddd,
+        type: 3}
+      propertyPath: waveCountdown
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 615387180509905912, guid: c025b49928315734393f0be9e53bbddd,
+        type: 3}
+      propertyPath: zombiefast_game
+      value: 0.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 615387180509905912, guid: c025b49928315734393f0be9e53bbddd,
+        type: 3}
+      propertyPath: devildogfast_game
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c025b49928315734393f0be9e53bbddd, type: 3}
 --- !u!4 &2143532478 stripped
