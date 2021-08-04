@@ -45,11 +45,13 @@ public class ExpUI : MonoBehaviour
         //currentExp = maxExp;
         yield return null;
     }
-    private void Update()
+    private void FixedUpdate()
     {
+        float time = Time.timeScale + 1.0f;
+
         currentExp = player.EXP;
 
-        expImage.fillAmount = Mathf.Lerp(expImage.fillAmount, currentExp / maxExp, Time.deltaTime * lerpSpeed);
+        expImage.fillAmount = Mathf.Lerp(expImage.fillAmount, currentExp / maxExp, time * lerpSpeed);
         
         levelText.text = string.Format("Level {0}", player.level);
     }
